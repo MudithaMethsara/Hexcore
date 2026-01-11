@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEXCORE // OBELISK X1</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF1E1E", // Bright Red Accent
+                        "secondary": "#B11226", // Dark Red
+                        "background-light": "#f8f5f5",
+                        "background-dark": "#0B0B0B", // Deepest Black
+                        "surface-dark": "#151515", // Slightly lighter for cards
+                        "border-dark": "#331010",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for cyber look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0B0B; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #331010; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B11226; 
+        }
+        .glow-text {
+            text-shadow: 0 0 10px rgba(255, 30, 30, 0.5);
+        }
+        .cyber-border {
+            position: relative;
+        }
+        .cyber-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid #FF1E1E;
+            border-right: 2px solid #FF1E1E;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-white font-display antialiased min-h-screen flex flex-col overflow-x-hidden selection:bg-primary selection:text-white">
+<!-- Background Grid Texture -->
+<div class="fixed inset-0 bg-grid-pattern bg-[size:40px_40px] opacity-20 pointer-events-none z-0"></div>
+<!-- Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark bg-[#0B0B0B]/90 backdrop-blur-md px-6 py-4 lg:px-12">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-white cursor-pointer group">
+<div class="size-8 text-primary transition-transform group-hover:rotate-180 duration-500">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-widest">HEXCORE <span class="text-primary">//</span> TERM_01</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8 pl-8 border-l border-border-dark h-6">
+<a class="text-gray-400 hover:text-white hover:text-primary transition-colors text-sm font-medium tracking-wide" href="#">HARDWARE</a>
+<a class="text-gray-400 hover:text-white hover:text-primary transition-colors text-sm font-medium tracking-wide" href="#">PERIPHERALS</a>
+<a class="text-white text-sm font-bold tracking-wide border-b border-primary pb-0.5" href="#">SYSTEMS</a>
+<a class="text-gray-400 hover:text-white hover:text-primary transition-colors text-sm font-medium tracking-wide" href="#">SUPPORT</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6">
+<div class="hidden md:flex relative w-64 group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 group-focus-within:text-primary">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full bg-surface-dark border border-border-dark text-white text-sm rounded-lg block pl-10 p-2.5 focus:ring-1 focus:ring-primary focus:border-primary placeholder-gray-600 transition-all" placeholder="SEARCH DATABASE..."/>
+</div>
+<div class="flex gap-3">
+<button class="relative flex items-center justify-center rounded-lg size-10 bg-surface-dark border border-border-dark text-white hover:bg-primary/20 hover:border-primary transition-all group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">shopping_cart</span>
+<span class="absolute -top-1 -right-1 flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-10 bg-surface-dark border border-border-dark text-white hover:bg-primary/20 hover:border-primary transition-all group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">person</span>
+</button>
+</div>
+</div>
+</header>
+<main class="relative z-10 flex-1 w-full max-w-[1440px] mx-auto p-4 md:p-8 lg:p-12 flex flex-col gap-8">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap items-center gap-2 text-sm uppercase tracking-widest font-mono">
+<a class="text-gray-500 hover:text-primary transition-colors" href="#">Home</a>
+<span class="text-gray-700">/</span>
+<a class="text-gray-500 hover:text-primary transition-colors" href="#">Systems</a>
+<span class="text-gray-700">/</span>
+<span class="text-primary font-bold">Obelisk X1</span>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+<!-- Left Column: Imagery -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Main Image Stage -->
+<div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-surface-dark border border-border-dark group cyber-border shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
+<div class="w-full h-full bg-center bg-contain bg-no-repeat transition-transform duration-700 group-hover:scale-105" data-alt="Futuristic gaming PC tower with red RGB lighting and tempered glass side panel" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDe66lpSwg1ypvfY-qzPZwlB4dhzi6vqx1sTzPWEMgPAiQuTgH_aSFctMp1-GMBzGMfEzY9CkY1AJiyyZ8KOszgIc6C34dAF-XcVZdYLNGIYyrW2JR6Rk9p6dXXkAR5odBLTOXoshc6g0juxeOoyVXcxwdVK1SuF8JoHnK5OGzY_RNpvksqZSDvi2Bmt3N2jKQSfnlSVJOkPsoC-XFs3YNNT8Ply-IDE56lK4QBVHkug0M2lzsh49Tq2GTUnQxIlnkPHJLOj9ltQkE");'>
+</div>
+<!-- Overlay Badges -->
+<div class="absolute top-6 left-6 flex flex-col gap-2">
+<div class="bg-primary/90 text-black font-bold px-3 py-1 text-xs uppercase tracking-wider rounded-sm backdrop-blur-sm">
+                            Flagship
+                        </div>
+<div class="bg-black/80 border border-primary/50 text-white font-bold px-3 py-1 text-xs uppercase tracking-wider rounded-sm backdrop-blur-sm">
+                            Ready to Ship
+                        </div>
+</div>
+</div>
+<!-- Thumbnails -->
+<div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+<button class="relative flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden border-2 border-primary cursor-pointer ring-2 ring-primary/20 ring-offset-2 ring-offset-[#0B0B0B]">
+<div class="w-full h-full bg-center bg-cover" data-alt="Front angle view of gaming PC" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0OuhV_v3gPjJT0HLi4nHQ2AdL-xd3sD80mwawR8z_NzCvJ_JIexpv4dKnWqGKLujib-KXqoWg28zYQTlh5zHScINiqhFlISendrtF-OyP9Y3TFcsMoxOkhGyVpc3pjiGy6nrJTkiy-80OQHK8cW1RT7GeKHxQXwQeKI6fUecrcAerns0yFd-ASBWYrBO762CYZBZMkA6wnj1oROOz9vjPxjDXfmZvKc6Y-CytU52yyKqhVznh3EqEkHNZC0whnuN9BBBV8psg87o");'></div>
+</button>
+<button class="relative flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden border border-border-dark hover:border-gray-500 transition-colors cursor-pointer opacity-70 hover:opacity-100">
+<div class="w-full h-full bg-center bg-cover" data-alt="Internal components detail view" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCagdS-DKC0mBegOxDB-DlvU-knh_D5kFCbYld_QI15GgslNbEFcTjDsheeyuLxKBzdGk_U9QVqsbTKSYMytP-3ib4R8aRxem_CvfLki249puD7VW3tjzuX8Yc5meuTfAG70szclBiwQW4eJMsb_00FObC7gTS6dBk_WggjFgDipbd1zbQm2_JNmSlaEOXc-IhUzPA2isRf2eDXY7bFz8rxnLrtTA4GSeI944xxkgDNb2MqVOKk2pveM46KPRCn_GsdrDLcV_Ccqcc");'></div>
+</button>
+<button class="relative flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden border border-border-dark hover:border-gray-500 transition-colors cursor-pointer opacity-70 hover:opacity-100">
+<div class="w-full h-full bg-center bg-cover" data-alt="Rear ports and cooling vents view" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCMw9IAX3p3c_35riZ68foEWTfGXVNYtx7NTSqffn11LVjnIODmAFXhrYlpGyS7Fj8Al871zQA_10TqB8KizChX7ITWf3st6JYEzjf0Dmr3WrGMcwPq-bORhzTX25aOcC-znQdB0YrJSszsMJVgpHQMc9_SBZaDL9ppj0VRst84AmhUGUt7az-iyaXlC0aj7DcgOQHPKI30VFyvVbJYGvY26UYkLn7WubLOh2Nez53TRR627uLOrl2VKW_KPeasPkNxWwAqerMZDAU");'></div>
+</button>
+<button class="relative flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden border border-border-dark hover:border-gray-500 transition-colors cursor-pointer opacity-70 hover:opacity-100">
+<div class="w-full h-full bg-center bg-cover" data-alt="Top down view showing RGB fans" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDJWDBkmC1x5lTBaZQCuqnM0WJd7QxBr6-2AWKkYVCPeQwop3TgCCXljaMSy677qIlvhnBQ-pzWAvT6cK_J_pE690WVZrsQxY1tvckLQJB-lWP5syF0fDvitkq6PCbgBD_-prKH359S_oZ3DFJqEs7HrAs1br4IHAdddt2BOxQf3g5LjSton89DaqrdvAOSQIFZ5cNnJZuTIuRofQubJqAjoeMtf7P1FJvBEZkEVHK5dnBlvvwgh0WeULgQs2ihpI6capei3h7yzmg");'></div>
+</button>
+</div>
+</div>
+<!-- Right Column: Info & Actions -->
+<div class="lg:col-span-5 flex flex-col h-full">
+<!-- Product Header -->
+<div class="mb-6 border-b border-border-dark pb-6">
+<div class="flex items-center gap-2 text-primary text-sm font-bold tracking-widest mb-2 uppercase">
+<span class="material-symbols-outlined text-lg">bolt</span>
+                        Ultra Tower Series
+                    </div>
+<h1 class="text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-4">OBELISK X1</h1>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined filled text-lg">star</span>
+<span class="material-symbols-outlined filled text-lg">star</span>
+<span class="material-symbols-outlined filled text-lg">star</span>
+<span class="material-symbols-outlined filled text-lg">star</span>
+<span class="material-symbols-outlined filled text-lg">star</span>
+</div>
+<span class="text-gray-400 text-sm font-mono">(1,240 verified pilots)</span>
+</div>
+</div>
+<!-- Price & Description -->
+<div class="mb-8">
+<div class="flex items-end gap-3 mb-4">
+<span class="text-5xl font-bold text-white glow-text tracking-tighter">$3,499.00</span>
+<span class="text-gray-500 line-through mb-1.5 font-mono">$3,899.00</span>
+</div>
+<p class="text-gray-400 leading-relaxed max-w-md border-l-2 border-primary/50 pl-4">
+                        Engineered for total system superiority. The Obelisk X1 crushes modern AAA titles and intensive rendering tasks with military-grade cooling and unthrottled performance.
+                    </p>
+</div>
+<!-- Tech Specs Table -->
+<div class="bg-surface-dark/50 rounded-xl border border-border-dark p-4 mb-8">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-white font-bold uppercase tracking-wider text-sm">System Specifications</h3>
+<span class="text-xs text-primary font-mono blink">STATUS: ONLINE</span>
+</div>
+<div class="grid grid-cols-1 gap-y-3">
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="text-gray-500 text-sm font-mono">PROCESSOR</span>
+<span class="text-white font-medium text-right">Intel® Core™ i9-13900K</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="text-gray-500 text-sm font-mono">GRAPHICS</span>
+<span class="text-white font-medium text-right">NVIDIA® GeForce RTX™ 4090</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="text-gray-500 text-sm font-mono">MEMORY</span>
+<span class="text-white font-medium text-right">64GB DDR5 6000MHz RGB</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="text-gray-500 text-sm font-mono">STORAGE</span>
+<span class="text-white font-medium text-right">2TB NVMe Gen4 SSD</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<span class="text-gray-500 text-sm font-mono">COOLING</span>
+<span class="text-white font-medium text-right">HEXCORE 360mm AIO Liquid</span>
+</div>
+</div>
+</div>
+<!-- Feature Badges -->
+<div class="flex flex-wrap gap-3 mb-8">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded bg-surface-dark border border-white/10 text-xs font-mono text-gray-300">
+<span class="material-symbols-outlined text-base text-primary">water_drop</span>
+                        LIQUID_COOLED
+                    </div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded bg-surface-dark border border-white/10 text-xs font-mono text-gray-300">
+<span class="material-symbols-outlined text-base text-primary">view_in_ar</span>
+                        VR_READY
+                    </div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded bg-surface-dark border border-white/10 text-xs font-mono text-gray-300">
+<span class="material-symbols-outlined text-base text-primary">wifi</span>
+                        WIFI_6E
+                    </div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded bg-surface-dark border border-white/10 text-xs font-mono text-gray-300">
+<span class="material-symbols-outlined text-base text-primary">speed</span>
+                        OVERCLOCKED
+                    </div>
+</div>
+<!-- Action Module -->
+<div class="mt-auto bg-surface-dark border border-border-dark p-6 rounded-xl relative overflow-hidden group/action">
+<div class="absolute top-0 right-0 p-2 opacity-10 group-hover/action:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl text-primary">rocket_launch</span>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 items-stretch relative z-10">
+<!-- Qty Selector -->
+<div class="flex items-center bg-[#0B0B0B] rounded-lg border border-border-dark">
+<button class="px-3 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition-colors rounded-l-lg">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="w-12 text-center font-mono text-lg">1</span>
+<button class="px-3 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition-colors rounded-r-lg">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<!-- Main CTA -->
+<button class="flex-1 bg-primary hover:bg-red-600 text-white font-bold text-lg py-3 px-6 rounded-lg shadow-[0_0_20px_rgba(255,30,30,0.3)] hover:shadow-[0_0_30px_rgba(255,30,30,0.5)] transition-all flex items-center justify-center gap-3 uppercase tracking-wide skew-x-[-2deg] hover:skew-x-0 active:scale-95">
+<span>Secure Unit</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<!-- Wishlist -->
+<button class="px-4 py-3 border border-border-dark rounded-lg hover:border-primary hover:bg-primary/10 text-gray-400 hover:text-primary transition-all">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<div class="mt-4 flex items-center gap-2 justify-center sm:justify-start">
+<div class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+<p class="text-xs text-green-500 font-mono">IN STOCK // SHIPS WITHIN 24H</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Extra Section: Reviews Breakdown -->
+<section class="mt-16 border-t border-border-dark pt-12">
+<div class="grid md:grid-cols-2 gap-12">
+<div class="flex flex-col gap-4">
+<h3 class="text-2xl font-bold uppercase">Field Reports</h3>
+<div class="flex items-center gap-6">
+<span class="text-6xl font-black tracking-tighter text-white">4.9</span>
+<div class="flex flex-col gap-1">
+<div class="flex text-primary">
+<span class="material-symbols-outlined filled">star</span>
+<span class="material-symbols-outlined filled">star</span>
+<span class="material-symbols-outlined filled">star</span>
+<span class="material-symbols-outlined filled">star</span>
+<span class="material-symbols-outlined filled">star</span>
+</div>
+<span class="text-sm text-gray-400 font-mono">Based on 1,240 reviews</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2 font-mono text-xs">
+<div class="flex items-center gap-3">
+<span class="w-8 text-right text-gray-400">5★</span>
+<div class="flex-1 h-2 bg-surface-dark rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[85%]"></div>
+</div>
+<span class="w-8 text-right text-gray-400">85%</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-8 text-right text-gray-400">4★</span>
+<div class="flex-1 h-2 bg-surface-dark rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[10%]"></div>
+</div>
+<span class="w-8 text-right text-gray-400">10%</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-8 text-right text-gray-400">3★</span>
+<div class="flex-1 h-2 bg-surface-dark rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[3%]"></div>
+</div>
+<span class="w-8 text-right text-gray-400">3%</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-8 text-right text-gray-400">2★</span>
+<div class="flex-1 h-2 bg-surface-dark rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[1%]"></div>
+</div>
+<span class="w-8 text-right text-gray-400">1%</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-8 text-right text-gray-400">1★</span>
+<div class="flex-1 h-2 bg-surface-dark rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[1%]"></div>
+</div>
+<span class="w-8 text-right text-gray-400">1%</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="mt-auto border-t border-border-dark bg-[#080808] py-8 text-center text-gray-600 text-sm font-mono uppercase tracking-wider">
+<p>© 2024 HEXCORE SYSTEMS. ALL RIGHTS RESERVED. <br/> TERMINAL ID: 8X-99</p>
+</footer>
+</body></html>

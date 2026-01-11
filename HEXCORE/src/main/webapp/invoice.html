@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEXCORE Invoice</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0B0B0B", // Deepest background
+                        "surface": "#141414", // Component background
+                        "surface-highlight": "#1E1E1E", // Hover state
+                        "brand-red": "#FF1E1E", // Bright accent
+                        "brand-crimson": "#B11226", // Darker red
+                        "border-subtle": "#333333",
+                        "text-main": "#FFFFFF",
+                        "text-muted": "#A1A1A1",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "mono": ["Space Mono", "monospace"], // Assuming fallback or similar feel if needed
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem", 
+                        "sm": "0.125rem",
+                        "lg": "0.25rem", 
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Scrollbar for a more cyber feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0B0B; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B11226; 
+        }
+
+        /* Invoice Paper Shadow */
+        .invoice-paper {
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5), 0 0 0 1px #333;
+        }
+
+        /* Cyberpunk Glitch Effect on Hover for Buttons */
+        .cyber-btn:hover {
+            box-shadow: 2px 2px 0px #FF1E1E;
+            transform: translate(-1px, -1px);
+        }
+
+        /* Print adjustments */
+        @media print {
+            body {
+                background-color: #fff;
+                color: #000;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .invoice-paper {
+                box-shadow: none;
+                border: none;
+                width: 100%;
+                max-width: none;
+                margin: 0;
+                padding: 0;
+                background-color: white !important;
+            }
+            /* Invert colors for ink saving if needed, but per request keeping dark mode aesthetic usually implies full bleed print or PDF export. 
+               We will assume "Print to PDF" keeps background graphics on. */
+             body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body class="bg-primary text-text-main font-display min-h-screen flex flex-col antialiased selection:bg-brand-red selection:text-white">
+<!-- Top Navigation (No Print) -->
+<header class="no-print flex items-center justify-between whitespace-nowrap border-b border-border-subtle bg-surface px-6 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 flex items-center justify-center text-brand-red">
+<span class="material-symbols-outlined text-3xl">hexagon</span>
+</div>
+<h2 class="text-white text-xl font-bold tracking-tight">HEXCORE <span class="text-brand-red text-xs align-top">OS</span></h2>
+</div>
+<div class="flex items-center gap-8">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-text-muted hover:text-brand-red transition-colors text-sm font-medium" href="#">Dashboard</a>
+<a class="text-brand-red text-sm font-bold" href="#">Invoices</a> <!-- Active state -->
+<a class="text-text-muted hover:text-brand-red transition-colors text-sm font-medium" href="#">Inventory</a>
+<a class="text-text-muted hover:text-brand-red transition-colors text-sm font-medium" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center size-10 rounded-sm bg-surface-highlight hover:bg-border-subtle transition-colors text-white">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-8 rounded-full bg-brand-crimson flex items-center justify-center text-white font-bold text-xs border border-brand-red">
+                    AD
+                </div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
+<!-- Action Toolbar (No Print) -->
+<div class="no-print w-full max-w-[1000px] mb-6 flex flex-wrap justify-between items-center gap-4">
+<div class="flex items-center gap-2 text-text-muted text-sm">
+<a class="hover:text-white flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-base">arrow_back</span> Back to Invoices
+                </a>
+</div>
+<div class="flex gap-3">
+<button class="cyber-btn flex items-center justify-center h-10 px-6 bg-surface border border-border-subtle hover:border-text-muted text-white text-sm font-bold tracking-wide transition-all uppercase rounded-sm">
+<span class="material-symbols-outlined text-base mr-2">edit</span> Edit
+                </button>
+<button class="cyber-btn flex items-center justify-center h-10 px-6 bg-surface border border-border-subtle hover:border-text-muted text-white text-sm font-bold tracking-wide transition-all uppercase rounded-sm">
+<span class="material-symbols-outlined text-base mr-2">picture_as_pdf</span> Download PDF
+                </button>
+<button class="cyber-btn flex items-center justify-center h-10 px-6 bg-brand-red hover:bg-brand-crimson text-white text-sm font-bold tracking-wide transition-all uppercase rounded-sm shadow-[0_0_15px_rgba(255,30,30,0.3)]" onclick="window.print()">
+<span class="material-symbols-outlined text-base mr-2">print</span> Print
+                </button>
+</div>
+</div>
+<!-- Printable Invoice Container -->
+<div class="invoice-paper w-full max-w-[1000px] bg-surface flex flex-col min-h-[1000px] relative overflow-hidden">
+<!-- Decorative Accent Bar -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-crimson via-brand-red to-brand-crimson"></div>
+<!-- Invoice Header -->
+<div class="p-10 pb-6 border-b border-border-subtle flex flex-wrap justify-between items-start gap-8">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3 text-white">
+<span class="material-symbols-outlined text-4xl text-brand-red">hexagon</span>
+<div>
+<h1 class="text-3xl font-black tracking-tighter leading-none">HEXCORE</h1>
+<p class="text-[10px] tracking-[0.2em] text-brand-red font-bold uppercase">Systems &amp; Logic</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end gap-2 text-right">
+<h2 class="text-5xl font-black text-white tracking-tight uppercase">Invoice</h2>
+<div class="flex items-center gap-3 mt-1">
+<span class="px-3 py-1 bg-brand-crimson/20 border border-brand-red/50 text-brand-red text-xs font-bold uppercase tracking-wider rounded-sm flex items-center gap-1">
+<span class="size-2 rounded-full bg-brand-red animate-pulse"></span>
+                            Status: Pending
+                         </span>
+<p class="text-text-muted font-mono text-sm">#HEX-2023-001</p>
+</div>
+</div>
+</div>
+<!-- Meta Data Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-b border-border-subtle">
+<!-- Issued By -->
+<div class="p-8 border-b md:border-b-0 border-r border-border-subtle">
+<p class="text-brand-red text-xs font-bold uppercase tracking-widest mb-3">Issued By</p>
+<p class="text-white font-bold mb-1">HEXCORE Industries</p>
+<p class="text-text-muted text-sm leading-relaxed">
+                        8080 Processor Lane<br/>
+                        Sector 7, Austin, TX<br/>
+                        United States
+                    </p>
+</div>
+<!-- Bill To -->
+<div class="p-8 border-b md:border-b-0 lg:border-r border-border-subtle">
+<p class="text-text-muted text-xs font-bold uppercase tracking-widest mb-3">Bill To</p>
+<p class="text-white font-bold mb-1">Cyberdyne Systems</p>
+<p class="text-text-muted text-sm leading-relaxed">
+                        101 Tech Blvd<br/>
+                        Silicon Valley, CA<br/>
+                        94025
+                    </p>
+</div>
+<!-- Dates -->
+<div class="p-8 border-b md:border-b-0 border-r border-border-subtle">
+<p class="text-text-muted text-xs font-bold uppercase tracking-widest mb-3">Date Issued</p>
+<p class="text-white text-lg font-mono">Oct 24, 2023</p>
+<p class="text-text-muted text-xs mt-1">10:42 AM PST</p>
+</div>
+<div class="p-8">
+<p class="text-text-muted text-xs font-bold uppercase tracking-widest mb-3">Payment Due</p>
+<p class="text-brand-red text-lg font-mono font-bold">Nov 07, 2023</p>
+<p class="text-text-muted text-xs mt-1">Net 14 Days</p>
+</div>
+</div>
+<!-- Items Table -->
+<div class="flex-1 p-8">
+<div class="w-full overflow-hidden border border-border-subtle rounded-sm bg-primary/30">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-highlight border-b border-border-subtle text-xs uppercase tracking-wider text-text-muted">
+<th class="p-4 font-medium w-[45%]">Item Description</th>
+<th class="p-4 font-medium text-center w-[15%]">Qty</th>
+<th class="p-4 font-medium text-right w-[20%]">Unit Price</th>
+<th class="p-4 font-medium text-right w-[20%]">Total</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle font-mono text-sm">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="p-4">
+<p class="text-white font-bold">RTX 4090 OC Edition</p>
+<p class="text-text-muted text-xs mt-1">NVIDIA GeForce, 24GB GDDR6X</p>
+</td>
+<td class="p-4 text-center text-white">1</td>
+<td class="p-4 text-right text-text-muted">$1,600.00</td>
+<td class="p-4 text-right text-white font-medium">$1,600.00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="p-4">
+<p class="text-white font-bold">HEXCORE Custom Liquid Cooling Loop</p>
+<p class="text-text-muted text-xs mt-1">Hardline tubing, RGB fittings, Dual Radiator</p>
+</td>
+<td class="p-4 text-center text-white">1</td>
+<td class="p-4 text-right text-text-muted">$800.00</td>
+<td class="p-4 text-right text-white font-medium">$800.00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="p-4">
+<p class="text-white font-bold">DDR5 64GB RAM Kit</p>
+<p class="text-text-muted text-xs mt-1">6000MHz, CL30, Black Heatspreader</p>
+</td>
+<td class="p-4 text-center text-white">2</td>
+<td class="p-4 text-right text-text-muted">$300.00</td>
+<td class="p-4 text-right text-white font-medium">$600.00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="p-4">
+<p class="text-white font-bold">System Assembly &amp; Overclocking</p>
+<p class="text-text-muted text-xs mt-1">Professional cable management + stress testing</p>
+</td>
+<td class="p-4 text-center text-white">1</td>
+<td class="p-4 text-right text-text-muted">$1,200.00</td>
+<td class="p-4 text-right text-white font-medium">$1,200.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Summary Section -->
+<div class="flex justify-end mt-8">
+<div class="w-full md:w-1/2 lg:w-1/3 flex flex-col gap-4">
+<div class="flex justify-between items-center text-sm">
+<span class="text-text-muted">Subtotal</span>
+<span class="text-white font-mono">$4,200.00</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-text-muted">Tax (8.0%)</span>
+<span class="text-white font-mono">$336.00</span>
+</div>
+<div class="h-px bg-border-subtle w-full my-1"></div>
+<div class="flex justify-between items-end">
+<span class="text-white font-bold uppercase tracking-widest text-lg pb-1">Total</span>
+<span class="text-4xl font-black text-brand-red font-mono tracking-tighter">$4,536.00</span>
+</div>
+<p class="text-xs text-right text-text-muted mt-2">USD</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="mt-auto bg-surface-highlight border-t border-border-subtle p-8 grid grid-cols-1 md:grid-cols-2 gap-8 text-xs text-text-muted">
+<div>
+<h4 class="text-white font-bold uppercase mb-2">Payment Methods</h4>
+<p class="mb-1">Bank Transfer (SWIFT): <span class="text-white font-mono">HEXUS33XXXX</span></p>
+<p>Account Number: <span class="text-white font-mono">9876 5432 1098</span></p>
+</div>
+<div class="md:text-right">
+<h4 class="text-white font-bold uppercase mb-2">Terms &amp; Conditions</h4>
+<p class="mb-1">Please pay within 14 days. 1.5% interest per month on late payments.</p>
+<p>Warranty void if system seal is broken by unauthorized personnel.</p>
+</div>
+</div>
+<!-- Bottom decorative bar -->
+<div class="h-2 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI4IiB2aWV3Qm94PSIwIDAgNDAgOCI+PHBhdGggZD0iTTAgMGg0djhIMHptMTAgMGg0djhIMTB6bTEwIDBoNHY4SDIwem0xMCAwaDR2OEgzMHoiIGZpbGw9IiMzMzMzMzMiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PC9zdmc+')] opacity-20"></div>
+</div>
+<div class="no-print mt-8 text-center text-text-muted text-sm pb-8">
+<p>© 2023 HEXCORE Industries. All systems operational.</p>
+</div>
+</main>
+</body></html>

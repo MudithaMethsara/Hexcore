@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEXCORE Admin User Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff1f1f",
+                        "primary-dark": "#B11226",
+                        "background-light": "#f8f5f5", // Fallback, not used much in this dark theme
+                        "background-dark": "#0B0B0B", // Deep Black requested
+                        "background-card": "#161616", // Slightly lighter for cards
+                        "border-color": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "glow": "0 0 15px rgba(255, 31, 31, 0.3)",
+                        "glow-sm": "0 0 8px rgba(255, 31, 31, 0.2)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Space Grotesk", sans-serif;
+        }
+        /* Custom scrollbar for that cyber feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0B0B;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff1f1f;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-white font-display overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- SIDEBAR -->
+<div class="hidden md:flex flex-col w-72 h-full border-r border-border-color bg-[#0f0f0f]">
+<div class="p-6 flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-gradient-to-br from-primary to-black flex items-center justify-center shadow-glow-sm">
+<span class="material-symbols-outlined text-white text-2xl">hexagon</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-widest text-white">HEXCORE</h1>
+<p class="text-xs text-primary tracking-[0.2em] font-medium">ADMIN v2.0</p>
+</div>
+</div>
+<div class="flex flex-col flex-1 px-4 py-4 gap-2 overflow-y-auto">
+<p class="px-4 text-xs font-bold text-gray-500 mb-2 uppercase tracking-widest">Main Menu</p>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">grid_view</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 border border-primary/20 text-white shadow-glow-sm" href="#">
+<span class="material-symbols-outlined text-primary">group</span>
+<span class="font-bold">Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">inventory_2</span>
+<span class="font-medium">Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">shopping_cart</span>
+<span class="font-medium">Orders</span>
+<span class="ml-auto bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">12</span>
+</a>
+<p class="px-4 text-xs font-bold text-gray-500 mt-6 mb-2 uppercase tracking-widest">System</p>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">analytics</span>
+<span class="font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</div>
+<div class="p-4 border-t border-border-color">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-500/5 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-medium">Logout</span>
+</a>
+</div>
+</div>
+<!-- MAIN CONTENT -->
+<div class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative">
+<!-- SUBTLE BACKGROUND GRID -->
+<div class="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style="background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px); background-size: 40px 40px;">
+</div>
+<!-- HEADER -->
+<header class="h-20 border-b border-border-color bg-background-dark/80 backdrop-blur-md flex items-center justify-between px-8 z-10 shrink-0">
+<div class="flex flex-col">
+<h2 class="text-2xl font-bold tracking-tight text-white">USER MANAGEMENT</h2>
+<div class="flex items-center gap-2 text-xs text-gray-500">
+<span>Admin</span>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span class="text-primary">Users</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors relative">
+<span class="material-symbols-outlined text-gray-400">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full shadow-glow"></span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-border-color">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold text-white leading-none">Alex Mercer</p>
+<p class="text-xs text-gray-500 mt-1">Super Admin</p>
+</div>
+<div class="w-10 h-10 rounded bg-gray-700 bg-cover bg-center border border-gray-600" data-alt="Admin user avatar showing a male face" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAbgos-Kt9iSaWNWSd_II_LCaoTbNDGKIunQ9P0tAzbuxxJ8YSWfFlzpoI6Ad0cdaC_yvEPINw0ne8zjo0hU5j1Xm6wTk9MMOojDnJ053LJhy0DKSchITPFkzsqv8pilnr1IhFSfRTxi7U1orIvF7Su5FP_zhBGQWPM60ElYmoAz_c4DwQFE6ydyzhDyH5XS0r6AP0SzNX25X02i6OGINMdV3TvMDBupIocX3V-VoydN9pLqzV391cgGTr4le0XxCo26vSjiTaPIic');"></div>
+</div>
+</div>
+</header>
+<!-- SCROLLABLE CONTENT -->
+<main class="flex-1 overflow-y-auto p-8 z-10">
+<div class="max-w-[1400px] mx-auto flex flex-col gap-6">
+<!-- STATS CARDS -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-background-card border border-border-color rounded-lg p-5 flex flex-col gap-1 relative overflow-hidden group hover:border-primary/50 transition-colors">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">group</span>
+</div>
+<p class="text-gray-400 text-sm font-medium uppercase tracking-wider">Total Users</p>
+<div class="flex items-end gap-3">
+<span class="text-3xl font-bold text-white">12,482</span>
+<span class="text-green-500 text-xs font-bold mb-1 flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> 12%
+                                </span>
+</div>
+</div>
+<div class="bg-background-card border border-border-color rounded-lg p-5 flex flex-col gap-1 relative overflow-hidden group hover:border-primary/50 transition-colors">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">security</span>
+</div>
+<p class="text-gray-400 text-sm font-medium uppercase tracking-wider">Active Admins</p>
+<div class="flex items-end gap-3">
+<span class="text-3xl font-bold text-white">14</span>
+<span class="text-gray-500 text-xs font-bold mb-1">
+                                    --
+                                </span>
+</div>
+</div>
+<div class="bg-background-card border border-border-color rounded-lg p-5 flex flex-col gap-1 relative overflow-hidden group hover:border-primary/50 transition-colors">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">shopping_bag</span>
+</div>
+<p class="text-gray-400 text-sm font-medium uppercase tracking-wider">New Customers</p>
+<div class="flex items-end gap-3">
+<span class="text-3xl font-bold text-white">128</span>
+<span class="text-green-500 text-xs font-bold mb-1 flex items-center">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> 5%
+                                </span>
+</div>
+</div>
+<div class="bg-background-card border border-border-color rounded-lg p-5 flex flex-col gap-1 relative overflow-hidden group hover:border-red-500/50 transition-colors">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-red-500">block</span>
+</div>
+<p class="text-gray-400 text-sm font-medium uppercase tracking-wider">Banned</p>
+<div class="flex items-end gap-3">
+<span class="text-3xl font-bold text-white">23</span>
+<span class="text-red-500 text-xs font-bold mb-1 flex items-center">
+<span class="material-symbols-outlined text-sm">warning</span> +2
+                                </span>
+</div>
+</div>
+</div>
+<!-- ACTION BAR -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-background-card p-4 rounded-lg border border-border-color">
+<!-- Search -->
+<div class="relative w-full md:w-96 group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 bg-[#0f0f0f] border border-[#2a2a2a] rounded text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-sm font-medium" placeholder="Search by name, email or ID..." type="text"/>
+</div>
+<!-- Filters & Add -->
+<div class="flex items-center gap-3 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+<div class="flex gap-2 bg-[#0f0f0f] p-1 rounded border border-[#2a2a2a]">
+<button class="px-4 py-1.5 text-xs font-bold text-white bg-[#2a2a2a] rounded shadow-sm">All</button>
+<button class="px-4 py-1.5 text-xs font-bold text-gray-500 hover:text-white hover:bg-white/5 rounded transition-colors">Admins</button>
+<button class="px-4 py-1.5 text-xs font-bold text-gray-500 hover:text-white hover:bg-white/5 rounded transition-colors">Staff</button>
+<button class="px-4 py-1.5 text-xs font-bold text-gray-500 hover:text-white hover:bg-white/5 rounded transition-colors">Banned</button>
+</div>
+<div class="w-px h-8 bg-[#2a2a2a] mx-1"></div>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary-dark text-white text-sm font-bold py-2.5 px-5 rounded shadow-glow transition-all active:scale-95 whitespace-nowrap">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Add User</span>
+</button>
+</div>
+</div>
+<!-- TABLE SECTION -->
+<div class="bg-background-card border border-border-color rounded-lg overflow-hidden flex flex-col flex-1">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#111] border-b border-border-color text-xs uppercase tracking-wider text-gray-500">
+<th class="p-4 font-bold w-12 text-center">
+<input class="rounded border-gray-600 bg-[#0f0f0f] text-primary focus:ring-0 focus:ring-offset-0 w-4 h-4 cursor-pointer" type="checkbox"/>
+</th>
+<th class="p-4 font-bold">User Identity</th>
+<th class="p-4 font-bold">Role</th>
+<th class="p-4 font-bold">Status</th>
+<th class="p-4 font-bold">Last Active</th>
+<th class="p-4 font-bold text-right">Total Spent</th>
+<th class="p-4 font-bold text-center w-20">Action</th>
+</tr>
+</thead>
+<tbody class="text-sm divide-y divide-[#222]">
+<!-- Row 1 -->
+<tr class="group hover:bg-white/[0.02] transition-colors">
+<td class="p-4 text-center">
+<input class="rounded border-gray-600 bg-[#0f0f0f] text-primary focus:ring-0 focus:ring-offset-0 w-4 h-4 cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-cover bg-center border border-gray-700 relative" data-alt="User avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDBfgKnssbL7GuqTGeEHvYApCx8ps9WpYoCQE69BdIY6IQb_zosNSymU7VR6fb_qf6aaVS_dcpI0JCeI6t1bQFbV9_0hlzipG_2BYQBtN2B7EyV6IfoNYAvU0N3M4krjxaIDP-NzUFLHK0tvzz9SxSbgtenplYUzW4wLiBzGeE7RbenRr3C9OoMmxUhE3UJfy7rOfwnKHdmbffJna7IUI8u3TcztU7tU3bTEjeMe5czuSrkH06_YPGLrQLNNdPO9vHmbOt2mu-OvvE');">
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-background-card rounded-full"></div>
+</div>
+<div class="flex flex-col">
+<span class="text-white font-bold group-hover:text-primary transition-colors cursor-pointer">NeonRider_99</span>
+<span class="text-gray-500 text-xs">neon@hexcore.net</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-bold bg-primary/20 text-primary border border-primary/30 shadow-[0_0_10px_rgba(255,31,31,0.2)]">
+                                                ADMIN
+                                            </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_5px_#22c55e]"></div>
+<span class="text-gray-300 font-medium">Active</span>
+</div>
+</td>
+<td class="p-4">
+<div class="text-gray-300 font-medium">Just now</div>
+<div class="text-gray-600 text-xs">From: 192.168.1.1</div>
+</td>
+<td class="p-4 text-right">
+<div class="text-white font-bold">$2,400.00</div>
+</td>
+<td class="p-4 text-center">
+<button class="text-gray-500 hover:text-white transition-colors w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-white/[0.02] transition-colors">
+<td class="p-4 text-center">
+<input class="rounded border-gray-600 bg-[#0f0f0f] text-primary focus:ring-0 focus:ring-offset-0 w-4 h-4 cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-cover bg-center border border-gray-700 relative" data-alt="User avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBXpswDK0R_6tdX0sojhQMihcG3g_FCEK6t8jfpwlFc8XCKc8PdYBmoeL3bzrmh017V7VNTDnqdhwAlQyCIS3GFNKhDorOeY6lk3Gl7fSiSt1q7gMkU-hQD0mO0OBI9w8P94jBvOOErVOQjT-YxSn56Lt2_UFwd4sL3njGNpT62mb_lrMgKO9XDOLHp773A-Epb4MgMm_IwpI7ZTlRwktXzX9F55pfHU009MMz4rvShSiPd2s2jlfCfSZzr7gX9vB_aWdBE30gHe1U');">
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-gray-500 border-2 border-background-card rounded-full"></div>
+</div>
+<div class="flex flex-col">
+<span class="text-white font-bold group-hover:text-primary transition-colors cursor-pointer">CyberSarah</span>
+<span class="text-gray-500 text-xs">sarah@domain.com</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-bold bg-white/5 text-gray-300 border border-white/10">
+                                                USER
+                                            </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-gray-500"></div>
+<span class="text-gray-300 font-medium">Offline</span>
+</div>
+</td>
+<td class="p-4">
+<div class="text-gray-300 font-medium">2 hours ago</div>
+<div class="text-gray-600 text-xs">From: 172.16.0.42</div>
+</td>
+<td class="p-4 text-right">
+<div class="text-white font-bold">$125.50</div>
+</td>
+<td class="p-4 text-center">
+<button class="text-gray-500 hover:text-white transition-colors w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-white/[0.02] transition-colors">
+<td class="p-4 text-center">
+<input class="rounded border-gray-600 bg-[#0f0f0f] text-primary focus:ring-0 focus:ring-offset-0 w-4 h-4 cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-cover bg-center border border-gray-700 relative" data-alt="User avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDkhmFQQOhO5Wo9KjFaqLTQCOxX5rZA7jut3P-RJ9OrrX7lQWIgrPrIl0DMlrPYFseLU7YUQWOhO9BgShvQkuuXVuhtMi9p49IlauhawZHy8Bo7cXKi481v4QO5n-iaoDytR8IeLZimNrPhZ_fAjMYvDGjetuI08IndakdOYaksyKie8IAQsZpbmm8YYaeuTRNcWVVbbcaodrtaeYnoxisLwf1d6Y6J4dfnHaJZqYHsQj0BuLmBl-RxiO9-zU90RcVl7gYe1BG_tfI');">
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-red-500 border-2 border-background-card rounded-full"></div>
+</div>
+<div class="flex flex-col">
+<span class="text-white font-bold group-hover:text-primary transition-colors cursor-pointer">Glitch_Mod</span>
+<span class="text-gray-500 text-xs">glitch@mod.io</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                                                STAFF
+                                            </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_5px_#ef4444]"></div>
+<span class="text-red-400 font-medium">Busy</span>
+</div>
+</td>
+<td class="p-4">
+<div class="text-gray-300 font-medium">5 mins ago</div>
+<div class="text-gray-600 text-xs">From: 10.0.0.5</div>
+</td>
+<td class="p-4 text-right">
+<div class="text-white font-bold">$0.00</div>
+</td>
+<td class="p-4 text-center">
+<button class="text-gray-500 hover:text-white transition-colors w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 (Banned) -->
+<tr class="group hover:bg-white/[0.02] transition-colors bg-red-900/5">
+<td class="p-4 text-center">
+<input class="rounded border-gray-600 bg-[#0f0f0f] text-primary focus:ring-0 focus:ring-offset-0 w-4 h-4 cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3 opacity-60">
+<div class="w-10 h-10 rounded bg-cover bg-center border border-gray-700 grayscale relative" data-alt="User avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCafn5C5GqJ6N58M_QiE5trQlAhmONlvrvgk11saWUT4FpXQngHx79GkZ4Gl3KLkiJuMBfd8BDALhBSbBT0eDXZCetHIyyqUNvgqVm1BGlT2722xHY-stMWfc7sYKo5wiwNV7fB1AhBW2FdGDGn__w55SnyC2CVoO-v3a9079UjmEeh_NnBH3GzgJIISMlCidzJhq6feXP_ibzqi4JRNlADAmPC32rsgGid43dsod-6_oGAskx659-dyKotH-n3-d5ObYmVw-uxmqM');">
+</div>
+<div class="flex flex-col">
+<span class="text-gray-300 font-bold line-through decoration-red-500">ToxicPlayer1</span>
+<span class="text-gray-600 text-xs">banned@user.net</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-bold bg-white/5 text-gray-500 border border-white/10">
+                                                USER
+                                            </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-red-500">block</span>
+<span class="text-red-500 font-bold">SUSPENDED</span>
+</div>
+</td>
+<td class="p-4">
+<div class="text-gray-500 font-medium">3 days ago</div>
+<div class="text-gray-700 text-xs">Reason: Harassment</div>
+</td>
+<td class="p-4 text-right">
+<div class="text-gray-500 font-bold">$54.00</div>
+</td>
+<td class="p-4 text-center">
+<button class="text-red-500 hover:text-red-400 transition-colors w-8 h-8 rounded-full hover:bg-red-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined">settings_backup_restore</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-white/[0.02] transition-colors">
+<td class="p-4 text-center">
+<input class="rounded border-gray-600 bg-[#0f0f0f] text-primary focus:ring-0 focus:ring-offset-0 w-4 h-4 cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-cover bg-center border border-gray-700 relative" data-alt="User avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDCcx-negZ4JMWdHi3DcwqibgHNHcmRDX3T59so-MK3KF3C0gb3mP2xLUlitbzvidcbJcOnX0COjBeg36VJ2aWat2gwsv_bIFiI-tjvVDLSbYP74CPfENa6Dc9BLfYMRgOmcvOwP2cJRkNhIuEGr0IHbt3j-NYBLTbSwsxYzAG2AYwuRBQmgJ4ez3HdS4BHWqgWsB3ytlyXO9IGVxcOLRjCosNBwmRuOPdSrRthv9Le8xx10P2zOccL6FNfBbeCKud-3OtFTjnkgII');">
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-gray-500 border-2 border-background-card rounded-full"></div>
+</div>
+<div class="flex flex-col">
+<span class="text-white font-bold group-hover:text-primary transition-colors cursor-pointer">Kaito_Kid</span>
+<span class="text-gray-500 text-xs">kaito@thief.jp</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-bold bg-white/5 text-gray-300 border border-white/10">
+                                                USER
+                                            </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-gray-500"></div>
+<span class="text-gray-300 font-medium">Offline</span>
+</div>
+</td>
+<td class="p-4">
+<div class="text-gray-300 font-medium">1 day ago</div>
+<div class="text-gray-600 text-xs">From: 203.0.113.1</div>
+</td>
+<td class="p-4 text-right">
+<div class="text-white font-bold">$450.00</div>
+</td>
+<td class="p-4 text-center">
+<button class="text-gray-500 hover:text-white transition-colors w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- PAGINATION -->
+<div class="flex items-center justify-between p-4 bg-[#111] border-t border-border-color">
+<div class="text-xs text-gray-500 font-medium">
+                                Showing <span class="text-white">1-5</span> of <span class="text-white">1,248</span> users
+                            </div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-[#0f0f0f] border border-[#2a2a2a] text-gray-500 hover:text-white hover:border-primary/50 transition-all disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white font-bold text-sm shadow-glow">
+                                    1
+                                </button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-[#0f0f0f] border border-[#2a2a2a] text-gray-400 hover:text-white hover:border-gray-500 transition-all text-sm font-medium">
+                                    2
+                                </button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-[#0f0f0f] border border-[#2a2a2a] text-gray-400 hover:text-white hover:border-gray-500 transition-all text-sm font-medium">
+                                    3
+                                </button>
+<span class="text-gray-600">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-[#0f0f0f] border border-[#2a2a2a] text-gray-400 hover:text-white hover:border-gray-500 transition-all text-sm font-medium">
+                                    12
+                                </button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-[#0f0f0f] border border-[#2a2a2a] text-gray-500 hover:text-white hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

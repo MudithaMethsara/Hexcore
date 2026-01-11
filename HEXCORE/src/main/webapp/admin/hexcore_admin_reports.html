@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEXCORE Admin Reports</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0B0B0B",       // Deep black background
+                        surface: "#111111",       // Slightly lighter card bg
+                        surfaceHover: "#1A1A1A",  // Hover state
+                        accent: "#FF1E1E",        // Aggressive Red
+                        accentDim: "#590a0a",     // Dark Red for subtle fills
+                        textMain: "#FFFFFF",      // Pure White
+                        textMuted: "#737373",     // Muted Grey
+                        borderDim: "#262626",     // Subtle borders
+                    },
+                    fontFamily: {
+                        display: ["Manrope", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(255, 30, 30, 0.15)',
+                        'glow-sm': '0 0 10px rgba(255, 30, 30, 0.1)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0B0B; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF1E1E; 
+        }
+        
+        .glass-panel {
+            background: rgba(17, 17, 17, 0.7);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-primary text-textMain font-display antialiased selection:bg-accent selection:text-white overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- SIDEBAR -->
+<aside class="w-20 lg:w-72 flex flex-col border-r border-borderDim bg-primary h-full shrink-0 transition-all duration-300">
+<!-- Logo Section -->
+<div class="h-20 flex items-center px-6 lg:px-8 border-b border-borderDim">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-gradient-to-br from-accent to-black flex items-center justify-center shadow-glow-sm">
+<span class="material-symbols-outlined text-white text-[24px]">hexagon</span>
+</div>
+<div class="hidden lg:flex flex-col">
+<h1 class="text-white text-lg font-extrabold tracking-wider leading-none">HEXCORE</h1>
+<p class="text-accent text-[10px] font-bold tracking-[0.2em] mt-1">COMMAND</p>
+</div>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex-1 overflow-y-auto py-6 flex flex-col gap-2 px-3 lg:px-4">
+<!-- Active Item -->
+<a class="flex items-center gap-4 px-3 py-3 rounded-lg bg-accent/10 border-l-2 border-accent group" href="#">
+<span class="material-symbols-outlined text-accent group-hover:text-white transition-colors">dashboard</span>
+<span class="hidden lg:block text-white font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-lg text-textMuted hover:bg-surfaceHover hover:text-white transition-all group border-l-2 border-transparent hover:border-borderDim" href="#">
+<span class="material-symbols-outlined group-hover:text-accent transition-colors">inventory_2</span>
+<span class="hidden lg:block font-medium text-sm">Inventory</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-lg text-textMuted hover:bg-surfaceHover hover:text-white transition-all group border-l-2 border-transparent hover:border-borderDim" href="#">
+<span class="material-symbols-outlined group-hover:text-accent transition-colors">shopping_cart</span>
+<span class="hidden lg:block font-medium text-sm">Orders</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-lg text-textMuted hover:bg-surfaceHover hover:text-white transition-all group border-l-2 border-transparent hover:border-borderDim" href="#">
+<span class="material-symbols-outlined group-hover:text-accent transition-colors">analytics</span>
+<span class="hidden lg:block font-medium text-sm">Analytics</span>
+</a>
+<div class="my-2 border-t border-borderDim/50 mx-2"></div>
+<a class="flex items-center gap-4 px-3 py-3 rounded-lg text-textMuted hover:bg-surfaceHover hover:text-white transition-all group border-l-2 border-transparent hover:border-borderDim" href="#">
+<span class="material-symbols-outlined group-hover:text-accent transition-colors">settings</span>
+<span class="hidden lg:block font-medium text-sm">System</span>
+</a>
+</nav>
+<!-- User Footer -->
+<div class="p-4 border-t border-borderDim">
+<a class="flex items-center gap-3 p-2 rounded-lg hover:bg-surfaceHover transition-colors" href="#">
+<div class="size-8 rounded-full bg-surface border border-borderDim flex items-center justify-center text-textMuted">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+</div>
+<span class="hidden lg:block text-sm font-medium text-textMuted">Logout</span>
+</a>
+</div>
+</aside>
+<!-- MAIN CONTENT -->
+<main class="flex-1 flex flex-col min-w-0 bg-primary relative overflow-hidden">
+<!-- Background Grid Pattern -->
+<div class="absolute inset-0 pointer-events-none opacity-[0.03]" style="background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px); background-size: 40px 40px;">
+</div>
+<!-- Header -->
+<header class="h-20 flex items-center justify-between px-8 border-b border-borderDim bg-primary/80 backdrop-blur-md sticky top-0 z-20">
+<h2 class="text-xl font-bold tracking-tight text-white flex items-center gap-3">
+<span class="text-accent material-symbols-outlined">bar_chart</span>
+                    System Overview
+                </h2>
+<div class="flex items-center gap-6">
+<!-- Search -->
+<div class="relative group hidden md:block">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-textMuted group-focus-within:text-accent transition-colors text-[20px]">search</span>
+</div>
+<input class="bg-surface border border-borderDim text-white text-sm rounded-lg focus:ring-1 focus:ring-accent focus:border-accent block w-64 pl-10 p-2.5 placeholder-textMuted transition-all" placeholder="Search system..." type="text"/>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-3">
+<button class="relative p-2 rounded-lg hover:bg-surfaceHover text-textMuted hover:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-accent rounded-full border border-primary"></span>
+</button>
+<div class="h-8 w-px bg-borderDim mx-1"></div>
+<button class="flex items-center gap-3 pl-2 rounded-lg hover:bg-surfaceHover transition-colors">
+<div class="text-right hidden md:block">
+<p class="text-sm font-bold text-white leading-none">Admin_01</p>
+<p class="text-xs text-textMuted mt-1">Super User</p>
+</div>
+<div class="size-10 rounded-full bg-surface border border-borderDim bg-cover bg-center" data-alt="User avatar showing a stylized cybernetic face" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAPrqLt45JJfveAH1eL7BIx93zVFhZtcjY_jPbnbPUaP-gdZGsTnxpBae95gFh4zYmv4mKedp1SkFUSFEa2MNL2xhkDXHN_lpgZOGtauj3Mfdh64ZYGG5TE7zRTcy5oikHOgIFdJr7GZsrF-LljakXluK7z688YTBeqsXPWdcPbub2KQCAfdAt0VC0AAMjC76gLJS1scHbWe1pUfSK4C9cD-7VSa1wrXAkBRHbgu2tDecgb1wnlKsTi33dB_3T9NZ-MyBqxVRNGvsk');">
+</div>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-6 lg:p-8">
+<div class="max-w-7xl mx-auto flex flex-col gap-6">
+<!-- KPI Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+<!-- Stat Card 1 -->
+<div class="bg-surface border border-borderDim rounded-xl p-6 relative overflow-hidden group hover:border-accent/30 transition-colors">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-white">payments</span>
+</div>
+<p class="text-textMuted text-sm font-medium uppercase tracking-wider">Total Revenue</p>
+<div class="flex items-baseline gap-3 mt-2">
+<h3 class="text-3xl font-bold text-white tabular-nums">$124,592</h3>
+<span class="text-accent text-sm font-bold bg-accent/10 px-2 py-0.5 rounded flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>12%
+                                </span>
+</div>
+<div class="w-full bg-borderDim h-1 mt-4 rounded-full overflow-hidden">
+<div class="bg-accent h-full w-[75%] shadow-[0_0_10px_rgba(255,30,30,0.5)]"></div>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface border border-borderDim rounded-xl p-6 relative overflow-hidden group hover:border-accent/30 transition-colors">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-white">memory</span>
+</div>
+<p class="text-textMuted text-sm font-medium uppercase tracking-wider">Hardware Units</p>
+<div class="flex items-baseline gap-3 mt-2">
+<h3 class="text-3xl font-bold text-white tabular-nums">482</h3>
+<span class="text-accent text-sm font-bold bg-accent/10 px-2 py-0.5 rounded flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>5%
+                                </span>
+</div>
+<div class="w-full bg-borderDim h-1 mt-4 rounded-full overflow-hidden">
+<div class="bg-accent h-full w-[45%] shadow-[0_0_10px_rgba(255,30,30,0.5)]"></div>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface border border-borderDim rounded-xl p-6 relative overflow-hidden group hover:border-accent/30 transition-colors">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-white">lan</span>
+</div>
+<p class="text-textMuted text-sm font-medium uppercase tracking-wider">Active Sessions</p>
+<div class="flex items-baseline gap-3 mt-2">
+<h3 class="text-3xl font-bold text-white tabular-nums">1,042</h3>
+<span class="text-textMuted text-sm font-medium bg-white/5 px-2 py-0.5 rounded flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_down</span>2%
+                                </span>
+</div>
+<div class="w-full bg-borderDim h-1 mt-4 rounded-full overflow-hidden">
+<div class="bg-white h-full w-[60%] opacity-20"></div>
+</div>
+</div>
+<!-- Stat Card 4 -->
+<div class="bg-surface border border-borderDim rounded-xl p-6 relative overflow-hidden group hover:border-accent/30 transition-colors">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-white">bolt</span>
+</div>
+<p class="text-textMuted text-sm font-medium uppercase tracking-wider">System Load</p>
+<div class="flex items-baseline gap-3 mt-2">
+<h3 class="text-3xl font-bold text-white tabular-nums">94%</h3>
+<span class="text-accent text-sm font-bold uppercase tracking-wider">Critical</span>
+</div>
+<div class="w-full bg-borderDim h-1 mt-4 rounded-full overflow-hidden">
+<div class="bg-accent h-full w-[94%] animate-pulse shadow-[0_0_10px_rgba(255,30,30,0.8)]"></div>
+</div>
+</div>
+</div>
+<!-- Main Chart Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Large Line Chart -->
+<div class="lg:col-span-2 bg-surface border border-borderDim rounded-xl p-6 flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-lg font-bold text-white">Q3 Sales Velocity</h3>
+<p class="text-textMuted text-sm">Real-time revenue tracking</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-xs font-medium bg-accent text-white rounded hover:bg-red-600 transition-colors">1H</button>
+<button class="px-3 py-1 text-xs font-medium bg-surfaceHover text-textMuted rounded hover:text-white transition-colors">1D</button>
+<button class="px-3 py-1 text-xs font-medium bg-surfaceHover text-textMuted rounded hover:text-white transition-colors">1W</button>
+</div>
+</div>
+<div class="flex-1 w-full min-h-[300px] relative">
+<!-- SVG Chart Reimplementation with Red Theme -->
+<svg class="w-full h-full" fill="none" preserveaspectratio="none" viewbox="0 0 478 150" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="chartGradient" x1="239" x2="239" y1="0" y2="150">
+<stop stop-color="#FF1E1E" stop-opacity="0.2"></stop>
+<stop offset="1" stop-color="#FF1E1E" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Area Fill -->
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V150H0V109Z" fill="url(#chartGradient)"></path>
+<!-- Stroke Line -->
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="#FF1E1E" stroke-linecap="round" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+</svg>
+<!-- Tooltip Overlay (Mock) -->
+<div class="absolute left-[60%] top-[20%] flex flex-col items-center">
+<div class="size-3 bg-primary border-2 border-accent rounded-full shadow-[0_0_10px_#FF1E1E]"></div>
+<div class="mt-2 bg-surface/90 backdrop-blur border border-accent/50 p-2 rounded text-xs text-white shadow-lg whitespace-nowrap">
+                                        $42,850 <span class="text-accent ml-1">▲</span>
+</div>
+<div class="h-32 w-px border-l border-dashed border-accent/30 absolute top-3"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4 px-2">
+<p class="text-textMuted text-xs font-mono">JUL</p>
+<p class="text-textMuted text-xs font-mono">AUG</p>
+<p class="text-textMuted text-xs font-mono">SEP</p>
+<p class="text-textMuted text-xs font-mono">OCT</p>
+<p class="text-textMuted text-xs font-mono">NOV</p>
+<p class="text-textMuted text-xs font-mono">DEC</p>
+</div>
+</div>
+<!-- Sidebar Charts Column -->
+<div class="flex flex-col gap-6">
+<!-- Category Split -->
+<div class="bg-surface border border-borderDim rounded-xl p-6 flex-1 flex flex-col justify-center">
+<h3 class="text-lg font-bold text-white mb-6">Inventory Health</h3>
+<div class="space-y-5">
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="text-white">GPUs (RTX 4090)</span>
+<span class="text-accent font-bold">12% Left</span>
+</div>
+<div class="h-2 w-full bg-surfaceHover rounded-full overflow-hidden">
+<div class="h-full bg-accent w-[12%] shadow-[0_0_8px_rgba(255,30,30,0.6)]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="text-white">CPUs (Intel/AMD)</span>
+<span class="text-textMuted">45% Left</span>
+</div>
+<div class="h-2 w-full bg-surfaceHover rounded-full overflow-hidden">
+<div class="h-full bg-white/20 w-[45%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="text-white">Storage (NVMe)</span>
+<span class="text-textMuted">78% Left</span>
+</div>
+<div class="h-2 w-full bg-surfaceHover rounded-full overflow-hidden">
+<div class="h-full bg-white/20 w-[78%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Mini Alert Panel -->
+<div class="bg-gradient-to-br from-surface to-accentDim/20 border border-accent/20 rounded-xl p-6 relative overflow-hidden">
+<div class="absolute -right-6 -top-6 text-accent/10">
+<span class="material-symbols-outlined text-[120px]">warning</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-2 text-accent">
+<span class="material-symbols-outlined">report_problem</span>
+<span class="text-sm font-bold uppercase tracking-wider">Alert</span>
+</div>
+<h4 class="text-white font-bold text-lg leading-tight">Server Latency Spike</h4>
+<p class="text-textMuted text-sm mt-2">Detected in EU-West node. Redirection protocols active.</p>
+<button class="mt-4 text-xs font-bold text-white bg-accent/20 hover:bg-accent border border-accent/50 px-3 py-2 rounded transition-all uppercase tracking-wide">
+                                        Investigate
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Transactions Table -->
+<div class="bg-surface border border-borderDim rounded-xl overflow-hidden flex flex-col">
+<div class="p-6 border-b border-borderDim flex items-center justify-between">
+<h3 class="text-lg font-bold text-white">Live Transaction Feed</h3>
+<button class="text-accent text-sm font-medium hover:text-white transition-colors flex items-center gap-1">
+                                View All <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm text-textMuted">
+<thead class="bg-surfaceHover text-xs uppercase font-medium text-white border-b border-borderDim">
+<tr>
+<th class="px-6 py-4">Order ID</th>
+<th class="px-6 py-4">Customer Alias</th>
+<th class="px-6 py-4">Product</th>
+<th class="px-6 py-4">Amount</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Timestamp</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-borderDim">
+<tr class="hover:bg-white/5 transition-colors group cursor-pointer">
+<td class="px-6 py-4 font-mono text-white group-hover:text-accent">#HEX-9921</td>
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="size-6 rounded-full bg-gradient-to-r from-gray-700 to-gray-600"></div>
+<span class="text-white font-medium">Neon_Rider</span>
+</td>
+<td class="px-6 py-4">RTX 4090 OC Edition</td>
+<td class="px-6 py-4 text-white font-bold">$1,999.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border border-green-500/30 text-green-400 bg-green-500/10">
+<span class="size-1.5 rounded-full bg-green-400"></span> Completed
+                                            </span>
+</td>
+<td class="px-6 py-4 font-mono text-xs">09:42:12 AM</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group cursor-pointer">
+<td class="px-6 py-4 font-mono text-white group-hover:text-accent">#HEX-9920</td>
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="size-6 rounded-full bg-gradient-to-r from-blue-900 to-blue-800"></div>
+<span class="text-white font-medium">Cyber_Wolf</span>
+</td>
+<td class="px-6 py-4">Ryzen 9 7950X</td>
+<td class="px-6 py-4 text-white font-bold">$699.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border border-yellow-500/30 text-yellow-400 bg-yellow-500/10">
+<span class="size-1.5 rounded-full bg-yellow-400 animate-pulse"></span> Processing
+                                            </span>
+</td>
+<td class="px-6 py-4 font-mono text-xs">09:38:05 AM</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group cursor-pointer">
+<td class="px-6 py-4 font-mono text-white group-hover:text-accent">#HEX-9919</td>
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="size-6 rounded-full bg-gradient-to-r from-purple-900 to-purple-800"></div>
+<span class="text-white font-medium">V0ID_WALKER</span>
+</td>
+<td class="px-6 py-4">Custom Water Loop Kit</td>
+<td class="px-6 py-4 text-white font-bold">$450.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border border-green-500/30 text-green-400 bg-green-500/10">
+<span class="size-1.5 rounded-full bg-green-400"></span> Completed
+                                            </span>
+</td>
+<td class="px-6 py-4 font-mono text-xs">09:21:44 AM</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group cursor-pointer">
+<td class="px-6 py-4 font-mono text-white group-hover:text-accent">#HEX-9918</td>
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="size-6 rounded-full bg-gradient-to-r from-red-900 to-red-800"></div>
+<span class="text-white font-medium">Null_Ptr</span>
+</td>
+<td class="px-6 py-4">Mech Keyboard (Red Switch)</td>
+<td class="px-6 py-4 text-white font-bold">$129.99</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border border-accent/30 text-accent bg-accent/10">
+<span class="size-1.5 rounded-full bg-accent"></span> Cancelled
+                                            </span>
+</td>
+<td class="px-6 py-4 font-mono text-xs">09:15:22 AM</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-borderDim bg-surfaceHover/50 flex items-center justify-between text-xs text-textMuted">
+<span>Showing 4 of 128 recent transactions</span>
+<div class="flex gap-2">
+<button class="hover:text-white transition-colors">Previous</button>
+<span class="text-borderDim">|</span>
+<button class="text-white">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

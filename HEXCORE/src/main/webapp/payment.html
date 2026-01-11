@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEXCORE Payment Page</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff1f1f",
+                        "primary-dark": "#b11226",
+                        "background-light": "#f8f5f5",
+                        "background-dark": "#0B0B0B",
+                        "card-dark": "#161616",
+                        "input-bg": "#231e1e",
+                        "border-dark": "#3a2727",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    boxShadow: {
+                        'neon': '0 0 10px rgba(255, 31, 31, 0.4), 0 0 20px rgba(255, 31, 31, 0.2)',
+                        'neon-sm': '0 0 5px rgba(255, 31, 31, 0.3)',
+                    },
+                    backgroundImage: {
+                        'hex-pattern': "url(\"data:image/svg+xml,%3Csvg width='24' height='40' viewBox='0 0 24 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40c5.523 0 10-4.477 10-10V10c0-5.523-4.477-10-10-10s-10 4.477-10 10v20c0 5.523 4.477 10 10 10z' fill='%23181818' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0B0B;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff1f1f;
+        }
+        
+        .input-glow:focus-within {
+            box-shadow: 0 0 15px rgba(255, 31, 31, 0.25);
+            border-color: #ff1f1f;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Background Pattern -->
+<div class="absolute inset-0 bg-hex-pattern opacity-30 pointer-events-none z-0"></div>
+<!-- Header -->
+<header class="relative z-10 flex items-center justify-between border-b border-border-dark bg-background-dark/95 backdrop-blur-sm px-6 lg:px-40 py-4 sticky top-0">
+<div class="flex items-center gap-3 text-white">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-2xl font-bold tracking-tighter">HEXCORE</h2>
+</div>
+<div class="hidden md:flex items-center gap-2 bg-primary/10 border border-primary/20 text-primary px-3 py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span class="text-sm font-bold tracking-wide uppercase">Secure Connection</span>
+</div>
+</header>
+<main class="relative z-10 flex-1 flex justify-center py-8 lg:py-12 px-4 md:px-6 lg:px-40">
+<div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Payment Details -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Page Heading -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 text-primary/80 mb-2">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span class="text-xs uppercase tracking-widest font-mono">System Checkout // Node 04</span>
+</div>
+<h1 class="text-4xl md:text-5xl font-black uppercase leading-none tracking-tighter">Initialize Payment</h1>
+<p class="text-gray-500 text-sm md:text-base">Complete transaction to acquire hardware assets.</p>
+</div>
+<!-- Payment Methods -->
+<div class="bg-card-dark border border-border-dark p-6 rounded-xl">
+<h3 class="text-white text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">payments</span>
+                            PAYMENT METHOD
+                        </h3>
+<div class="grid grid-cols-3 gap-3">
+<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-primary/10 border border-primary text-primary transition-all shadow-neon-sm ring-1 ring-primary">
+<span class="material-symbols-outlined text-2xl">credit_card</span>
+<span class="text-xs font-bold">CARD</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-input-bg border border-border-dark text-gray-400 hover:text-white hover:border-gray-500 transition-all">
+<span class="material-symbols-outlined text-2xl">account_balance_wallet</span>
+<span class="text-xs font-bold">PAYPAL</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-input-bg border border-border-dark text-gray-400 hover:text-white hover:border-gray-500 transition-all">
+<span class="material-symbols-outlined text-2xl">currency_bitcoin</span>
+<span class="text-xs font-bold">CRYPTO</span>
+</button>
+</div>
+</div>
+<!-- Credit Card Form -->
+<div class="bg-card-dark border border-border-dark p-6 rounded-xl flex flex-col gap-5">
+<div class="flex justify-between items-center mb-1">
+<h3 class="text-white text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">shield</span>
+                                CARD DETAILS
+                            </h3>
+<div class="flex gap-2 opacity-50">
+<span class="text-xs bg-white text-black px-1 rounded font-bold">VISA</span>
+<span class="text-xs bg-white text-black px-1 rounded font-bold">MC</span>
+<span class="text-xs bg-white text-black px-1 rounded font-bold">AMEX</span>
+</div>
+</div>
+<!-- Card Number -->
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">Card Number</label>
+<div class="relative group input-glow rounded-lg transition-all duration-300">
+<div class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
+<span class="material-symbols-outlined">credit_card</span>
+</div>
+<input class="w-full bg-input-bg border border-border-dark rounded-lg py-3 pl-12 pr-4 text-white placeholder-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors font-mono tracking-wider" placeholder="0000 0000 0000 0000" type="text"/>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 text-primary">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Expiry -->
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">Expiration</label>
+<div class="relative input-glow rounded-lg">
+<input class="w-full bg-input-bg border border-border-dark rounded-lg py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors font-mono text-center" placeholder="MM / YY" type="text"/>
+</div>
+</div>
+<!-- CVC -->
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1 flex justify-between">
+                                    CVC Code
+                                    <span class="material-symbols-outlined text-[14px] cursor-help" title="3 digits on back">help</span>
+</label>
+<div class="relative input-glow rounded-lg">
+<div class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+</div>
+<input class="w-full bg-input-bg border border-border-dark rounded-lg py-3 pl-10 pr-4 text-white placeholder-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors font-mono" placeholder="123" type="text"/>
+</div>
+</div>
+</div>
+<!-- Cardholder Name -->
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">Cardholder Name</label>
+<div class="relative input-glow rounded-lg">
+<input class="w-full bg-input-bg border border-border-dark rounded-lg py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors uppercase" placeholder="JOHN DOE" type="text"/>
+</div>
+</div>
+<!-- Save Card Checkbox -->
+<label class="flex items-center gap-3 cursor-pointer group mt-2">
+<div class="relative flex items-center">
+<input class="peer h-5 w-5 cursor-pointer appearance-none rounded border border-border-dark bg-input-bg checked:border-primary checked:bg-primary transition-all" type="checkbox"/>
+<span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-white opacity-0 peer-checked:opacity-100 pointer-events-none">check</span>
+</div>
+<span class="text-sm text-gray-400 group-hover:text-white transition-colors">Encrypt and save card for future upgrades</span>
+</label>
+</div>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<div class="bg-card-dark border border-border-dark p-6 rounded-xl flex flex-col h-full">
+<h2 class="text-xl font-bold text-white mb-6 uppercase border-b border-border-dark pb-4 tracking-wide flex justify-between items-center">
+                            Order Summary
+                            <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded">2 ITEMS</span>
+</h2>
+<!-- Items List -->
+<div class="flex flex-col gap-4 mb-6 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+<!-- Item 1 -->
+<div class="flex gap-4 group">
+<div class="bg-center bg-no-repeat bg-cover rounded-lg size-20 shrink-0 border border-border-dark relative overflow-hidden" data-alt="Cyberpunk high-end gaming PC case with red lighting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB9XqE43_9RqEsNV04h9dTLPEbWFdwZqCPEF95kG4ll40Os-A1U6Cja1BvWgrrJW0unwt3txTUGdBUJR2eLwWKMjevO-bskBbJPV709qB4jDpUPEKM9XBj0mAI5K-RpySlc7W7yZ9uT7jlzihkyadcpk_GvTgK7jK7VMkkMRv8WV8uYpH5z_lNlUTg8xrbPR_cXfWlxzoWI2264plmJrNykKWUvhNTRIcO0Z6JbN1E6B7ZkLwJoxRfQGGqFYZ0i0crJVJOo7JJT7ak");'>
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors"></div>
+</div>
+<div class="flex flex-col justify-between py-1 flex-1">
+<div>
+<p class="text-white font-bold leading-tight group-hover:text-primary transition-colors cursor-pointer">RTX 4090 Cyber-Rig</p>
+<p class="text-gray-500 text-xs mt-1">Liquid Cooled • 64GB RAM</p>
+</div>
+<div class="flex justify-between items-end">
+<p class="text-gray-400 text-sm">Qty: 1</p>
+<p class="text-white font-mono font-bold">$3,499.00</p>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-4 group">
+<div class="bg-center bg-no-repeat bg-cover rounded-lg size-20 shrink-0 border border-border-dark relative overflow-hidden" data-alt="Mechanical gaming keyboard with RGB backlight" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAl7tJQSMHLTEdNN_IInSNM8RUKv2UAJAeJZiKKfYIc8L3Cyr5ewqwdEJE8hEK4e0KUWRQQIyJd8BiOQklgWm3GrUGk7Kk43kY00w0DMjZIymh2FDk9xbH-XIwsxleLU8Mbe7dodxwr7w59zfU-JX2nzmRhwvjdINWhSOBQ2O3d4VPFeeQyampzIscyzqUMGRG-7skT2T3pEXT9tnE7eAx__ACB9VRgXLcSIxYITSCZ1aZxhCupNErBXblgTIZqJapuX035TI52-f8");'>
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors"></div>
+</div>
+<div class="flex flex-col justify-between py-1 flex-1">
+<div>
+<p class="text-white font-bold leading-tight group-hover:text-primary transition-colors cursor-pointer">Mech-Key Pro</p>
+<p class="text-gray-500 text-xs mt-1">Cherry MX Red • Wireless</p>
+</div>
+<div class="flex justify-between items-end">
+<p class="text-gray-400 text-sm">Qty: 1</p>
+<p class="text-white font-mono font-bold">$199.00</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Promo Code -->
+<div class="mb-6 pt-4 border-t border-border-dark">
+<div class="flex gap-2">
+<input class="flex-1 bg-input-bg border border-border-dark rounded-lg py-2 px-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-primary uppercase" placeholder="ENTER PROMO CODE" type="text"/>
+<button class="px-4 py-2 bg-white/5 hover:bg-white/10 text-white text-sm font-bold rounded-lg border border-white/10 transition-colors">APPLY</button>
+</div>
+</div>
+<!-- Totals -->
+<div class="flex flex-col gap-3 mt-auto">
+<div class="flex justify-between text-sm text-gray-400">
+<span>Subtotal</span>
+<span class="font-mono text-white">$3,698.00</span>
+</div>
+<div class="flex justify-between text-sm text-gray-400">
+<span>Shipping (Express Droid)</span>
+<span class="font-mono text-primary">FREE</span>
+</div>
+<div class="flex justify-between text-sm text-gray-400">
+<span>Tax (Estimated)</span>
+<span class="font-mono text-white">$295.84</span>
+</div>
+<div class="h-px bg-gradient-to-r from-transparent via-border-dark to-transparent my-2"></div>
+<div class="flex justify-between items-end">
+<span class="text-lg font-bold text-white">TOTAL DUE</span>
+<div class="text-right">
+<span class="text-xs text-primary block mb-1">USD</span>
+<span class="text-3xl font-black text-white font-mono tracking-tighter shadow-black drop-shadow-lg">$3,993.84</span>
+</div>
+</div>
+</div>
+<!-- Pay Button -->
+<button class="mt-8 group relative w-full overflow-hidden rounded-lg bg-primary p-4 text-center font-bold text-white shadow-neon transition-all hover:bg-red-600 active:scale-[0.98]">
+<div class="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-10"></div>
+<div class="flex items-center justify-center gap-3 relative z-20">
+<span class="material-symbols-outlined animate-pulse">fingerprint</span>
+<span class="text-lg tracking-widest uppercase">AUTHORIZE PAYMENT</span>
+</div>
+</button>
+<!-- Security Footer -->
+<div class="mt-4 flex justify-center gap-6 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+<div class="flex items-center gap-1 text-xs text-white">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+                                256-BIT SSL
+                            </div>
+<div class="flex items-center gap-1 text-xs text-white">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+                                VERIFIED
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="relative z-10 border-t border-border-dark bg-background-dark py-8">
+<div class="px-6 lg:px-40 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600">
+<p>© 2024 HEXCORE SYSTEMS. ALL RIGHTS RESERVED.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">PRIVACY PROTOCOL</a>
+<a class="hover:text-primary transition-colors" href="#">TERMS OF SERVICE</a>
+<a class="hover:text-primary transition-colors" href="#">SUPPORT NODE</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

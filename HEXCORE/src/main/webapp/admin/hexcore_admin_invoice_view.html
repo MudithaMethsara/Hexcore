@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEXCORE Admin Invoice View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff1f1f",
+                        "secondary": "#B11226",
+                        "background-light": "#f8f5f5",
+                        "background-dark": "#0B0B0B", /* Overridden to match specific deep black request */
+                        "surface-dark": "#151515",
+                        "surface-highlight": "#1e1e1e",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 15px rgba(255, 31, 31, 0.3)',
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for cyber look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0B0B; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff1f1f; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 font-display overflow-x-hidden antialiased">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- SideNavBar -->
+<aside class="w-20 lg:w-64 flex flex-col border-r border-[#2a2a2a] bg-[#111111] shrink-0 transition-all duration-300">
+<div class="h-16 flex items-center justify-center lg:justify-start lg:px-6 border-b border-[#2a2a2a]">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-md size-8 bg-primary/20 flex items-center justify-center text-primary font-bold border border-primary/50" data-alt="HEXCORE Logo Placeholder">
+                    H
+                </div>
+<h1 class="hidden lg:block text-white text-lg font-bold tracking-wider leading-none">HEXCORE</h1>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2 p-3 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
+<span class="hidden lg:block text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-white bg-secondary/10 border border-secondary/20 rounded-lg shadow-[0_0_10px_rgba(177,18,38,0.1)]" href="#">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="hidden lg:block text-sm font-medium text-white">Invoices</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">inventory_2</span>
+<span class="hidden lg:block text-sm font-medium">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">group</span>
+<span class="hidden lg:block text-sm font-medium">Clients</span>
+</a>
+<div class="mt-auto border-t border-[#2a2a2a] pt-2">
+<a class="flex items-center gap-3 px-3 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+<span class="hidden lg:block text-sm font-medium">Settings</span>
+</a>
+</div>
+</nav>
+<div class="p-4 border-t border-[#2a2a2a]">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8 ring-2 ring-[#2a2a2a]" data-alt="User avatar abstract gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD-9f08dHZMjp1bD7SBMtLXBEj9bKmt4GFbew-rICDR3xbwaI8dNBwQ6vkgNUxT00KztWJUDfSHaxCkh5xV57v60JEMjpcNNpDYVlbnG2UVMASJ3YTESIV1MzALWIZZWDY4Q9tiVJs0I6QyIQH4yqC8986XFOch98eJMUsQHI-7YHnhGG95z9VjbNWFEfC43IX8q2UUz3BRO0jMjq30UcA4yQzBPi0lCKxyZnqq71y1kOfFeOW_3vnuJVwbxCI0A7ad_mmz6eVZSBI");'></div>
+<div class="hidden lg:flex flex-col">
+<p class="text-white text-xs font-bold">Admin</p>
+<p class="text-gray-500 text-[10px]">admin@hexcore.tech</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Top Header & Breadcrumbs -->
+<header class="h-16 flex items-center justify-between px-6 lg:px-10 border-b border-[#2a2a2a] bg-[#111111]/80 backdrop-blur-md z-10">
+<div class="flex items-center gap-2">
+<a class="text-gray-500 hover:text-primary text-sm font-medium transition-colors" href="#">Invoices</a>
+<span class="text-gray-600 text-sm">/</span>
+<span class="text-white text-sm font-bold tracking-wide">INV-2049</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Paid
+                </div>
+<button class="text-gray-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto p-6 lg:p-10">
+<div class="max-w-6xl mx-auto flex flex-col xl:flex-row gap-6">
+<!-- Main Invoice Column -->
+<div class="flex-1 flex flex-col gap-6">
+<!-- Page Heading & Actions -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h2 class="text-3xl font-bold text-white tracking-tight">INVOICE <span class="text-primary">#2049</span></h2>
+<p class="text-gray-500 text-sm">Created on Oct 24, 2023 at 14:32</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<button class="flex items-center justify-center gap-2 h-9 px-4 rounded bg-[#1e1e1e] border border-[#333] hover:border-gray-500 text-white text-sm font-medium transition-all hover:bg-[#252525]">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Print</span>
+</button>
+<button class="flex items-center justify-center gap-2 h-9 px-4 rounded bg-[#1e1e1e] border border-[#333] hover:border-gray-500 text-white text-sm font-medium transition-all hover:bg-[#252525]">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>PDF</span>
+</button>
+<button class="flex items-center justify-center gap-2 h-9 px-4 rounded bg-[#1e1e1e] border border-[#333] hover:border-gray-500 text-white text-sm font-medium transition-all hover:bg-[#252525]">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+<span>Email</span>
+</button>
+<button class="flex items-center justify-center gap-2 h-9 px-4 rounded bg-primary hover:bg-red-600 text-black text-sm font-bold shadow-glow transition-all">
+<span>Process Refund</span>
+</button>
+</div>
+</div>
+<!-- Invoice Card -->
+<div class="bg-surface-dark border border-[#2a2a2a] rounded-lg overflow-hidden shadow-2xl relative">
+<!-- Decorative Top Border -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-transparent"></div>
+<div class="p-8 md:p-10">
+<!-- Invoice Header -->
+<div class="flex flex-col md:flex-row justify-between mb-12 gap-8">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">hexagon</span>
+</div>
+<h3 class="text-2xl font-bold tracking-widest text-white">HEXCORE</h3>
+</div>
+<div class="text-gray-400 text-sm leading-relaxed font-body">
+<p>1010 Binary Blvd, Sector 7</p>
+<p>Neo-Tokyo, NK 90210</p>
+<p>United States</p>
+<p class="mt-2 text-primary/80">support@hexcore.tech</p>
+</div>
+</div>
+<div class="text-left md:text-right">
+<h4 class="text-gray-500 uppercase text-xs font-bold tracking-wider mb-2">Bill To</h4>
+<h3 class="text-xl font-bold text-white mb-2">CyberDyne Systems</h3>
+<div class="text-gray-400 text-sm leading-relaxed font-body">
+<p>800 Skynet Way</p>
+<p>Silicon Valley, CA 94025</p>
+<p class="mt-2">ref: PROJECT_T800</p>
+</div>
+</div>
+</div>
+<!-- Line Items -->
+<div class="overflow-x-auto mb-8">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-[#2a2a2a]">
+<th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase tracking-wider w-1/2">Item Description</th>
+<th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Qty</th>
+<th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Unit Price</th>
+<th class="py-3 px-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Amount</th>
+</tr>
+</thead>
+<tbody class="text-sm font-body">
+<tr class="border-b border-[#2a2a2a]/50 hover:bg-white/5 transition-colors">
+<td class="py-4 px-4">
+<p class="font-medium text-white">NVIDIA GeForce RTX 4090 OC</p>
+<p class="text-gray-500 text-xs mt-0.5">24GB GDDR6X, Founders Edition</p>
+</td>
+<td class="py-4 px-4 text-right text-gray-300">2</td>
+<td class="py-4 px-4 text-right text-gray-300">$1,599.00</td>
+<td class="py-4 px-4 text-right text-white font-medium">$3,198.00</td>
+</tr>
+<tr class="border-b border-[#2a2a2a]/50 hover:bg-white/5 transition-colors">
+<td class="py-4 px-4">
+<p class="font-medium text-white">AMD Ryzen 9 7950X</p>
+<p class="text-gray-500 text-xs mt-0.5">16-Core, 32-Thread Unlocked Desktop Processor</p>
+</td>
+<td class="py-4 px-4 text-right text-gray-300">2</td>
+<td class="py-4 px-4 text-right text-gray-300">$699.00</td>
+<td class="py-4 px-4 text-right text-white font-medium">$1,398.00</td>
+</tr>
+<tr class="border-b border-[#2a2a2a]/50 hover:bg-white/5 transition-colors">
+<td class="py-4 px-4">
+<p class="font-medium text-white">Custom Water Loop Kit - Red</p>
+<p class="text-gray-500 text-xs mt-0.5">Hardline tubing, CPU/GPU block, Pump/Res Combo</p>
+</td>
+<td class="py-4 px-4 text-right text-gray-300">1</td>
+<td class="py-4 px-4 text-right text-gray-300">$450.00</td>
+<td class="py-4 px-4 text-right text-white font-medium">$450.00</td>
+</tr>
+<tr class="border-b border-[#2a2a2a]/50 hover:bg-white/5 transition-colors">
+<td class="py-4 px-4">
+<p class="font-medium text-white">System Assembly &amp; Stress Test</p>
+<p class="text-gray-500 text-xs mt-0.5">Labor - 5 hours</p>
+</td>
+<td class="py-4 px-4 text-right text-gray-300">1</td>
+<td class="py-4 px-4 text-right text-gray-300">$250.00</td>
+<td class="py-4 px-4 text-right text-white font-medium">$250.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Totals Section -->
+<div class="flex flex-col md:flex-row justify-end items-end gap-6 border-t border-[#2a2a2a] pt-8">
+<div class="w-full md:w-72 flex flex-col gap-3">
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 font-medium">Subtotal</span>
+<span class="text-white font-body">$5,296.00</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 font-medium">Tax (8.5%)</span>
+<span class="text-white font-body">$450.16</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 font-medium">Shipping</span>
+<span class="text-white font-body">$0.00</span>
+</div>
+<div class="h-px bg-[#2a2a2a] my-2"></div>
+<div class="flex justify-between items-center">
+<span class="text-white font-bold text-lg">Total Due</span>
+<span class="text-primary font-bold text-2xl font-body">$5,746.16</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Strip -->
+<div class="bg-[#0f0f0f] border-t border-[#2a2a2a] px-8 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-gray-600 font-body">Thank you for your business. Warranty void if seal broken.</p>
+<p class="text-xs text-gray-600 font-body font-mono">ID: 8a9f-4b2c-9d1e</p>
+</div>
+</div>
+</div>
+<!-- Right Side - Activity/Info Panel -->
+<div class="w-full xl:w-80 shrink-0 flex flex-col gap-6">
+<!-- Activity Log Widget -->
+<div class="bg-surface-dark border border-[#2a2a2a] rounded-lg p-5">
+<h3 class="text-white font-bold text-sm uppercase tracking-wider mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">history</span>
+                             History
+                        </h3>
+<div class="relative pl-2 border-l border-[#2a2a2a] flex flex-col gap-6 font-body">
+<!-- Timeline Item 1 -->
+<div class="relative pl-6">
+<div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
+<p class="text-xs text-gray-400 mb-1">Oct 26, 2023 - 09:15 AM</p>
+<p class="text-sm text-white">Payment successfully verified via Stripe.</p>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative pl-6">
+<div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#333] border border-gray-600"></div>
+<p class="text-xs text-gray-400 mb-1">Oct 25, 2023 - 16:40 PM</p>
+<p class="text-sm text-white">Invoice sent to client@cyberdyne.net</p>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative pl-6">
+<div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#333] border border-gray-600"></div>
+<p class="text-xs text-gray-400 mb-1">Oct 24, 2023 - 14:32 PM</p>
+<p class="text-sm text-white">Invoice created by Admin</p>
+</div>
+</div>
+</div>
+<!-- Client Note Widget -->
+<div class="bg-surface-dark border border-[#2a2a2a] rounded-lg p-5">
+<h3 class="text-white font-bold text-sm uppercase tracking-wider mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">sticky_note_2</span>
+                             Internal Notes
+                        </h3>
+<div class="bg-[#0B0B0B] p-3 rounded text-sm text-gray-300 font-mono border border-[#2a2a2a]">
+                            Client requested priority assembly. Custom loop needs to be leak tested for 24h before shipping.
+                        </div>
+<button class="w-full mt-3 py-2 text-xs font-bold text-gray-400 hover:text-white border border-dashed border-[#333] hover:border-gray-500 rounded transition-colors">
+                            + Add Note
+                        </button>
+</div>
+<!-- Payment Info -->
+<div class="bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-[#2a2a2a] rounded-lg p-5">
+<h3 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Payment Method</h3>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400">credit_card</span>
+<span class="text-sm text-white">Mastercard **** 4242</span>
+</div>
+<span class="material-symbols-outlined text-emerald-500 text-lg">check_circle</span>
+</div>
+<p class="text-xs text-gray-500">Transaction ID: tx_1N...4k2</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

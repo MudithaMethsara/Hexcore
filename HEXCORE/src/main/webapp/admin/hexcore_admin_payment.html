@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEXCORE Admin Payments</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a0a0a",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#191919",
+                        "hex-black": "#0B0B0B",
+                        "hex-red": "#FF1E1E",
+                        "hex-red-dark": "#B11226",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for cyber-tech feel */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0B0B0B; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 0px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF1E1E; }
+        
+        .cyber-border {
+            position: relative;
+        }
+        .cyber-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 2px; height: 100%;
+            background: #FF1E1E;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .group:hover .cyber-border::before {
+            opacity: 1;
+        }
+        
+        .glitch-hover:hover {
+            text-shadow: 2px 0 #FF1E1E, -2px 0 cyan;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white h-screen flex overflow-hidden selection:bg-hex-red selection:text-white">
+<!-- Sidebar -->
+<div class="w-64 h-full bg-hex-black border-r border-[#303030] flex flex-col shrink-0 z-20">
+<!-- Logo -->
+<div class="p-6 flex items-center gap-3 border-b border-[#303030]/50">
+<div class="size-10 bg-gradient-to-br from-hex-red to-hex-red-dark rounded flex items-center justify-center shadow-[0_0_15px_rgba(255,30,30,0.3)]">
+<span class="material-symbols-outlined text-white text-2xl">hexagon</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-xl font-bold tracking-widest leading-none">HEXCORE</h1>
+<p class="text-[#ababab] text-xs font-normal tracking-wider mt-1">ADMIN CONSOLE_</p>
+</div>
+</div>
+<!-- Nav Items -->
+<nav class="flex-1 flex flex-col gap-1 p-4 overflow-y-auto">
+<a class="group flex items-center gap-3 px-4 py-3 text-[#ababab] hover:text-white hover:bg-[#303030] rounded transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-sm font-medium tracking-wide">DASHBOARD</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 bg-hex-red/10 text-hex-red rounded border border-hex-red/20 shadow-[0_0_10px_rgba(177,18,38,0.1)] relative overflow-hidden" href="#">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-hex-red"></div>
+<span class="material-symbols-outlined text-[20px] fill-1">payments</span>
+<span class="text-sm font-bold tracking-wide">PAYMENTS</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 text-[#ababab] hover:text-white hover:bg-[#303030] rounded transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+<span class="text-sm font-medium tracking-wide">ORDERS</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 text-[#ababab] hover:text-white hover:bg-[#303030] rounded transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+<span class="text-sm font-medium tracking-wide">INVENTORY</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 text-[#ababab] hover:text-white hover:bg-[#303030] rounded transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+<span class="text-sm font-medium tracking-wide">ANALYTICS</span>
+</a>
+</nav>
+<!-- User/System Status -->
+<div class="p-4 border-t border-[#303030]">
+<div class="flex items-center gap-3 px-2 py-2 rounded bg-[#1a1a1a] border border-[#333]">
+<div class="relative">
+<div class="size-8 rounded bg-gray-700 bg-cover bg-center" data-alt="User avatar showing a tactical helmet" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBkE8yV32y8zozERZIzHXfaWZaGJAPnEftaT6EsP0O8_DvU7lyXbdFs12ZnJ4gVK6wmDqt9WOj4lOPCg5jzimIRAXFqSDYrfRN8oed_kL2yEgK1Mrjas91PgDED_pe_NSJzEUM0zofc0tLLfX1U4mItHrqxLNB7kdIroWnOeB7mwAwrtek5PVMU8fUMsMJbdhW5xtf-dx-L4izOvfgHz_hLCCNWhCibCOlgbOhUhBSJPH9Qn1nZFFOnOTcSltfNEeYFU5LlNz789l4");'></div>
+<div class="absolute -bottom-1 -right-1 size-2.5 bg-[#0bda0b] rounded-full border-2 border-[#1a1a1a]"></div>
+</div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-white text-xs font-bold truncate">ADMIN_01</p>
+<p class="text-[#ababab] text-[10px] truncate">SYS_ONLINE</p>
+</div>
+<button class="ml-auto text-[#ababab] hover:text-white">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<div class="flex-1 flex flex-col h-full overflow-hidden bg-black relative">
+<!-- Background Grid Texture -->
+<div class="absolute inset-0 z-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#333 1px, transparent 1px); background-size: 20px 20px;"></div>
+<!-- Top Header -->
+<header class="h-16 border-b border-[#303030] bg-hex-black/80 backdrop-blur-sm flex items-center justify-between px-8 shrink-0 z-10 sticky top-0">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-hex-red">terminal</span>
+<h2 class="text-white text-lg font-bold tracking-[0.1em]">SYSTEM // PAYMENTS_OVERVIEW</h2>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search -->
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#ababab] group-focus-within:text-hex-red transition-colors text-[20px]">search</span>
+<input class="bg-[#141414] border border-[#303030] text-sm text-white pl-10 pr-4 py-2 w-64 rounded focus:ring-1 focus:ring-hex-red focus:border-hex-red focus:outline-none placeholder-[#555] tracking-wide font-mono" placeholder="SEARCH HASH / ID..." type="text"/>
+</div>
+<!-- Actions -->
+<div class="flex gap-2">
+<button class="size-9 flex items-center justify-center rounded bg-[#141414] border border-[#303030] text-[#ababab] hover:text-white hover:border-hex-red transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="size-9 flex items-center justify-center rounded bg-[#141414] border border-[#303030] text-[#ababab] hover:text-white hover:border-hex-red transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<main class="flex-1 overflow-y-auto p-8 z-10">
+<div class="max-w-[1400px] mx-auto flex flex-col gap-8">
+<!-- KPI Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1 -->
+<div class="group relative bg-[#111] p-6 rounded border border-[#303030] overflow-hidden hover:border-hex-red/50 transition-colors">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">account_balance_wallet</span>
+</div>
+<p class="text-[#ababab] text-xs font-bold tracking-widest mb-2">TOTAL VOLUME</p>
+<div class="flex items-baseline gap-2">
+<p class="text-white text-3xl font-bold tracking-tight">$124,592.00</p>
+</div>
+<div class="flex items-center gap-1 mt-2 text-[#0bda0b]">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-xs font-bold">+12.5%</span>
+<span class="text-[#555] text-xs ml-1 font-mono">VS LAST 30D</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative bg-[#111] p-6 rounded border border-[#303030] overflow-hidden hover:border-hex-red/50 transition-colors">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">check_circle</span>
+</div>
+<p class="text-[#ababab] text-xs font-bold tracking-widest mb-2">SUCCESS RATE</p>
+<div class="flex items-baseline gap-2">
+<p class="text-white text-3xl font-bold tracking-tight">98.4%</p>
+</div>
+<div class="flex items-center gap-1 mt-2 text-[#0bda0b]">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-xs font-bold">+0.4%</span>
+<span class="text-[#555] text-xs ml-1 font-mono">OPTIMAL</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative bg-[#111] p-6 rounded border border-[#303030] overflow-hidden hover:border-hex-red/50 transition-colors">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">pending</span>
+</div>
+<p class="text-[#ababab] text-xs font-bold tracking-widest mb-2">PENDING OPS</p>
+<div class="flex items-baseline gap-2">
+<p class="text-white text-3xl font-bold tracking-tight">12</p>
+<span class="text-sm text-[#ababab]">ITEMS</span>
+</div>
+<div class="flex items-center gap-1 mt-2 text-hex-red">
+<span class="material-symbols-outlined text-sm">priority_high</span>
+<span class="text-xs font-bold">ACTION REQ.</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative bg-[#111] p-6 rounded border border-[#303030] overflow-hidden hover:border-hex-red/50 transition-colors">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">savings</span>
+</div>
+<p class="text-[#ababab] text-xs font-bold tracking-widest mb-2">NET PROFIT</p>
+<div class="flex items-baseline gap-2">
+<p class="text-white text-3xl font-bold tracking-tight">$42,100.00</p>
+</div>
+<div class="flex items-center gap-1 mt-2 text-[#0bda0b]">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-xs font-bold">+8.1%</span>
+</div>
+</div>
+</div>
+<!-- Charts Area -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Main Chart -->
+<div class="lg:col-span-2 bg-[#111] border border-[#303030] rounded p-6 flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<div>
+<h3 class="text-white text-sm font-bold tracking-widest">REVENUE VELOCITY (24H)</h3>
+<p class="text-[#555] text-xs mt-1">REAL-TIME TRANSACTION FLOW</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-hex-red animate-pulse"></span>
+<span class="text-hex-red text-xs font-bold tracking-wider">LIVE</span>
+</div>
+</div>
+<div class="h-64 w-full relative">
+<!-- SVG Chart -->
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 100 50">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#FF1E1E" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#FF1E1E" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,50 L0,30 L10,35 L20,20 L30,25 L40,10 L50,15 L60,5 L70,20 L80,15 L90,10 L100,5 L100,50 Z" fill="url(#chartGradient)"></path>
+<path d="M0,30 L10,35 L20,20 L30,25 L40,10 L50,15 L60,5 L70,20 L80,15 L90,10 L100,5" fill="none" stroke="#FF1E1E" stroke-width="0.5" vector-effect="non-scaling-stroke"></path>
+</svg>
+<!-- Grid Lines -->
+<div class="absolute inset-0 border-l border-b border-[#303030] pointer-events-none"></div>
+</div>
+</div>
+<!-- Side Stats / Quick Actions -->
+<div class="bg-[#111] border border-[#303030] rounded p-6 flex flex-col gap-6">
+<h3 class="text-white text-sm font-bold tracking-widest">GATEWAY STATUS</h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#ababab]">credit_card</span>
+<span class="text-sm text-white">Stripe</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-[#0bda0b]/10 text-[#0bda0b] text-[10px] font-bold border border-[#0bda0b]/20">ONLINE</span>
+</div>
+<div class="w-full bg-[#303030] h-1 rounded-full overflow-hidden">
+<div class="bg-[#0bda0b] h-full w-[99%]"></div>
+</div>
+<div class="flex items-center justify-between mt-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#ababab]">currency_bitcoin</span>
+<span class="text-sm text-white">Crypto</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-[#0bda0b]/10 text-[#0bda0b] text-[10px] font-bold border border-[#0bda0b]/20">ONLINE</span>
+</div>
+<div class="w-full bg-[#303030] h-1 rounded-full overflow-hidden">
+<div class="bg-[#0bda0b] h-full w-[100%]"></div>
+</div>
+<div class="flex items-center justify-between mt-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#ababab]">account_balance</span>
+<span class="text-sm text-white">Wire Transfer</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-yellow-500/10 text-yellow-500 text-[10px] font-bold border border-yellow-500/20">DEGRADED</span>
+</div>
+<div class="w-full bg-[#303030] h-1 rounded-full overflow-hidden">
+<div class="bg-yellow-500 h-full w-[65%]"></div>
+</div>
+</div>
+<div class="mt-auto pt-6 border-t border-[#303030]">
+<button class="w-full py-3 bg-hex-red hover:bg-hex-red-dark text-white text-sm font-bold tracking-wider rounded flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-lg">bolt</span>
+                                SYSTEM DIAGNOSTIC
+                            </button>
+</div>
+</div>
+</div>
+<!-- Transaction Table Section -->
+<div class="flex flex-col gap-4">
+<!-- Filter Toolbar -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-[#111] border border-hex-red text-white text-xs font-bold rounded hover:bg-hex-red/10 transition-colors">ALL</button>
+<button class="px-4 py-2 bg-transparent border border-[#303030] text-[#ababab] text-xs font-bold rounded hover:text-white hover:border-[#555] transition-colors">COMPLETED</button>
+<button class="px-4 py-2 bg-transparent border border-[#303030] text-[#ababab] text-xs font-bold rounded hover:text-white hover:border-[#555] transition-colors">PENDING</button>
+<button class="px-4 py-2 bg-transparent border border-[#303030] text-[#ababab] text-xs font-bold rounded hover:text-white hover:border-[#555] transition-colors">FAILED</button>
+</div>
+<div class="flex gap-2">
+<div class="relative">
+<select class="appearance-none bg-[#111] border border-[#303030] text-white text-xs font-bold py-2 pl-4 pr-8 rounded focus:border-hex-red focus:ring-0 cursor-pointer">
+<option>LAST 24 HOURS</option>
+<option>LAST 7 DAYS</option>
+<option>LAST 30 DAYS</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-[#ababab] text-sm pointer-events-none">expand_more</span>
+</div>
+<button class="px-3 py-2 bg-[#111] border border-[#303030] text-white rounded hover:border-hex-red transition-colors flex items-center">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+</button>
+<button class="px-3 py-2 bg-[#111] border border-[#303030] text-white rounded hover:border-hex-red transition-colors flex items-center">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</div>
+</div>
+<!-- Table -->
+<div class="w-full overflow-x-auto rounded border border-[#303030] bg-[#111]">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-[#303030] bg-[#161616]">
+<th class="p-4 text-[#ababab] text-[10px] font-bold tracking-widest uppercase">TX Hash</th>
+<th class="p-4 text-[#ababab] text-[10px] font-bold tracking-widest uppercase">Customer</th>
+<th class="p-4 text-[#ababab] text-[10px] font-bold tracking-widest uppercase">Product</th>
+<th class="p-4 text-[#ababab] text-[10px] font-bold tracking-widest uppercase text-right">Amount</th>
+<th class="p-4 text-[#ababab] text-[10px] font-bold tracking-widest uppercase text-center">Date</th>
+<th class="p-4 text-[#ababab] text-[10px] font-bold tracking-widest uppercase text-center">Status</th>
+<th class="p-4 text-[#ababab] text-[10px] font-bold tracking-widest uppercase text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<!-- Row 1 -->
+<tr class="group border-b border-[#303030] hover:bg-[#1a1a1a] transition-colors relative">
+<td class="p-4 font-mono text-[#555] group-hover:text-white transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">tag</span>
+                                            #HEX-992
+                                        </div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-6 bg-gray-700 rounded-full bg-cover" data-alt="Small avatar of user" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBbXVr4jWr2ufVBD6z_puV-ciypAwK71RrtFxp3d5I70K6fY1nYYeoY1zGxvxARPh8ObelbOYmaL1McQn375jpVK_sKBWXkHVj9nYsuZgtgDUloOIPukvU3nlLAQz09Nw6faqeYC4vcFSUmbqMlKOHt05aNC8BsIx_qOzhEb5CcYwL-R8iGmO2seAdpFTSBL_q1JCnbCJ0doYqdywyByvy0UTMeEexOZY2bIfOIl3g4j0FtfblfGk2rEeO_Xo3QZG1nNLkVYpwvr50");'></div>
+<span class="font-bold text-white">Alex Mercer</span>
+</div>
+</td>
+<td class="p-4 text-[#ababab]">NVIDIA RTX 4090 OC</td>
+<td class="p-4 text-right font-mono font-bold text-white">$1,699.00</td>
+<td class="p-4 text-center text-[#ababab] text-xs">OCT 24, 14:02</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-[#0bda0b]/10 border border-[#0bda0b]/30 text-[#0bda0b] text-[10px] font-bold tracking-wider">
+                                            COMPLETED
+                                        </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#ababab] hover:text-white p-1 hover:bg-[#303030] rounded">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+<td class="absolute left-0 top-0 bottom-0 w-[2px] bg-hex-red opacity-0 group-hover:opacity-100 transition-opacity"></td>
+</tr>
+<!-- Row 2 -->
+<tr class="group border-b border-[#303030] hover:bg-[#1a1a1a] transition-colors relative">
+<td class="p-4 font-mono text-[#555] group-hover:text-white transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">tag</span>
+                                            #HEX-991
+                                        </div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-6 bg-gray-700 rounded-full bg-cover" data-alt="Small avatar of user" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuClEHfnAyhmlDHk4Kr5Fqe-rJ561nYoAoGbcyrlRXxnF_xnsd0ae1tvq2xSODpvDPGZxFOdfh6HmQ7DKLV_BN39_upzTu7iRXCESwZ8D2t2Rg4I4yIScuVn6eSLav7j5LeuAEQj0N8SywtvjGz4j994UZ8-JV36j1PZVV_h2uQiOZGpG6cmW2pq020_zss4iRfDMZFolAeD4VQ3MON3EVP_HJOoSY9J6Z600B9S-rbWGxA-4ZHhQvzNPDNjgH--kWlj6zUlTZITJo8");'></div>
+<span class="font-bold text-white">Sarah Connor</span>
+</div>
+</td>
+<td class="p-4 text-[#ababab]">Intel Core i9-14900K</td>
+<td class="p-4 text-right font-mono font-bold text-white">$589.00</td>
+<td class="p-4 text-center text-[#ababab] text-xs">OCT 24, 13:45</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-hex-red/10 border border-hex-red/30 text-hex-red text-[10px] font-bold tracking-wider">
+                                            FAILED
+                                        </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#ababab] hover:text-white p-1 hover:bg-[#303030] rounded">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+<td class="absolute left-0 top-0 bottom-0 w-[2px] bg-hex-red opacity-0 group-hover:opacity-100 transition-opacity"></td>
+</tr>
+<!-- Row 3 -->
+<tr class="group border-b border-[#303030] hover:bg-[#1a1a1a] transition-colors relative">
+<td class="p-4 font-mono text-[#555] group-hover:text-white transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">tag</span>
+                                            #HEX-990
+                                        </div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-6 bg-gray-700 rounded-full bg-cover" data-alt="Small avatar of user" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCbCA14NoPubBHotCd0ECFXJQbllU7FeUXWIE61Ry0WJCST-Dt9m9DLVfNVVKugB_yWjSThd5vpH1zQT1Ka8uFeWixOzeezzlmXAPWGnDFzpOI5DExJ1zTx9ILfTMnrOhUft7VWscLI6oTqvDrBdDqh0-bEPpn2fZDROD2ylQbthVl4OY2wSsXa4Zn1J80_cdO_Ca0UPw2He5iDQxjSKNzVQuDwaiE6BZdL5KR0ILh4R3Syjdn7cGpTTRd3D0H94VrdU9eYkVotQ1A");'></div>
+<span class="font-bold text-white">David Martinez</span>
+</div>
+</td>
+<td class="p-4 text-[#ababab]">Corsair Dominator 64GB</td>
+<td class="p-4 text-right font-mono font-bold text-white">$329.99</td>
+<td class="p-4 text-center text-[#ababab] text-xs">OCT 24, 12:15</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 text-[10px] font-bold tracking-wider">
+                                            PENDING
+                                        </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#ababab] hover:text-white p-1 hover:bg-[#303030] rounded">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+<td class="absolute left-0 top-0 bottom-0 w-[2px] bg-hex-red opacity-0 group-hover:opacity-100 transition-opacity"></td>
+</tr>
+<!-- Row 4 -->
+<tr class="group border-b border-[#303030] hover:bg-[#1a1a1a] transition-colors relative">
+<td class="p-4 font-mono text-[#555] group-hover:text-white transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">tag</span>
+                                            #HEX-989
+                                        </div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-6 bg-gray-700 rounded-full bg-cover" data-alt="Small avatar of user" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDweLGEg0AwNBj71VUrQuCD6_Qk6TVCL9yBoPRwLmddWZmaD-eKAqNDOxyQdq3AyVOQK_uEIEi9nQTuYUNmaKSJdhH1ocvl37BoLfAWQFG-u-FWp_r4-TV4MlmB8BnxbH4L0MR0HgXmn2DIP0lmFdARWW0AYtgJmLuIQ4Ui0LB-S1OXnHDX7tPdh8U7AyZ7oEbvPc9Ls_rK_v6dmFSLxllXMHOp3bVFOCPSq3MTLkzTuowfSfYdM0WT0TwkqFJA51j9BrPjMY08OKc");'></div>
+<span class="font-bold text-white">Ellen Ripley</span>
+</div>
+</td>
+<td class="p-4 text-[#ababab]">Liquid Coolant (Red) x4</td>
+<td class="p-4 text-right font-mono font-bold text-white">$89.50</td>
+<td class="p-4 text-center text-[#ababab] text-xs">OCT 24, 11:30</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-[#0bda0b]/10 border border-[#0bda0b]/30 text-[#0bda0b] text-[10px] font-bold tracking-wider">
+                                            COMPLETED
+                                        </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#ababab] hover:text-white p-1 hover:bg-[#303030] rounded">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+<td class="absolute left-0 top-0 bottom-0 w-[2px] bg-hex-red opacity-0 group-hover:opacity-100 transition-opacity"></td>
+</tr>
+<!-- Row 5 -->
+<tr class="group border-b border-[#303030] hover:bg-[#1a1a1a] transition-colors relative">
+<td class="p-4 font-mono text-[#555] group-hover:text-white transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">tag</span>
+                                            #HEX-988
+                                        </div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-6 bg-gray-700 rounded-full bg-cover" data-alt="Small avatar of user" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDbMuEnEy3WCXdx-HgLX5rKRKcWnM1TrKDTaHFIAOr959G5JKvMz8AUOsuSdDzh2dEWxXjHFCdJmRP2Gk5fM_lXthX3SrqSsbsPXi_EPGjf_zn6yy1cGjrYMgtgx-TUui89REu67bcIlf-_7BW8uijmglTrOk9nYzE6FqPWm0RTSV2DIzvl8XnzENfwziR_SUUmfUVGmr0EDFpwTbhFcF2zkix-B4PMvX1H1dj27HdeeMTCCmGr4ijsZkJPM8u3UgLHbaioVy3wZiU");'></div>
+<span class="font-bold text-white">Gordan Freeman</span>
+</div>
+</td>
+<td class="p-4 text-[#ababab]">Crowbar (Decorative)</td>
+<td class="p-4 text-right font-mono font-bold text-white">$45.00</td>
+<td class="p-4 text-center text-[#ababab] text-xs">OCT 24, 10:12</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-[#0bda0b]/10 border border-[#0bda0b]/30 text-[#0bda0b] text-[10px] font-bold tracking-wider">
+                                            COMPLETED
+                                        </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#ababab] hover:text-white p-1 hover:bg-[#303030] rounded">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+<td class="absolute left-0 top-0 bottom-0 w-[2px] bg-hex-red opacity-0 group-hover:opacity-100 transition-opacity"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex justify-between items-center py-4">
+<p class="text-[#ababab] text-xs">SHOWING 1-5 OF 482 ITEMS</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-[#111] border border-[#303030] text-[#ababab] rounded hover:text-white hover:border-hex-red transition-colors text-xs font-bold">PREV</button>
+<button class="px-3 py-1 bg-hex-red text-white rounded border border-hex-red text-xs font-bold shadow-[0_0_10px_rgba(255,30,30,0.4)]">1</button>
+<button class="px-3 py-1 bg-[#111] border border-[#303030] text-[#ababab] rounded hover:text-white hover:border-hex-red transition-colors text-xs font-bold">2</button>
+<button class="px-3 py-1 bg-[#111] border border-[#303030] text-[#ababab] rounded hover:text-white hover:border-hex-red transition-colors text-xs font-bold">3</button>
+<button class="px-3 py-1 bg-[#111] border border-[#303030] text-[#ababab] rounded hover:text-white hover:border-hex-red transition-colors text-xs font-bold">NEXT</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

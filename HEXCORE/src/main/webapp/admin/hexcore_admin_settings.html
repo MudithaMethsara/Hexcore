@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEXCORE Admin Console</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#af1225",
+              "background-light": "#f8f6f6",
+              "background-dark": "#0B0B0B",
+              "surface-dark": "#141414",
+              "surface-light": "#1A1A1A",
+              "border-dark": "#2a2a2a",
+              "accent-red": "#FF1E1E",
+            },
+            fontFamily: {
+              "display": ["Space Grotesk", "sans-serif"],
+              "body": ["Noto Sans", "sans-serif"],
+            },
+            borderRadius: {
+              "DEFAULT": "0.125rem", 
+              "lg": "0.25rem", 
+              "xl": "0.5rem", 
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+      /* Custom scrollbar for that cyber feel */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0B0B0B; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2a2a2a; 
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #af1225; 
+      }
+      
+      .toggle-checkbox:checked {
+        right: 0;
+        border-color: #af1225;
+      }
+      .toggle-checkbox:checked + .toggle-label {
+        background-color: #af1225;
+      }
+      
+      /* Glitch effect on hover for primary buttons */
+      .glitch-hover:hover {
+        animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+        color: #fff;
+      }
+      @keyframes glitch {
+        0% { transform: translate(0) }
+        20% { transform: translate(-2px, 2px) }
+        40% { transform: translate(-2px, -2px) }
+        60% { transform: translate(2px, 2px) }
+        80% { transform: translate(2px, -2px) }
+        100% { transform: translate(0) }
+      }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen overflow-x-hidden selection:bg-primary selection:text-white">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar -->
+<div class="hidden md:flex flex-col w-72 bg-[#110a0b] border-r border-[#2a2a2a] shrink-0 z-20">
+<div class="flex flex-col h-full p-4">
+<!-- Brand -->
+<div class="flex gap-3 items-center mb-10 px-2 mt-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded size-10 border border-[#2a2a2a]" data-alt="Red glowing hexagonal cyber logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAXLoUidGNbGpaSOm2pxtjeIEYL2il6Gkzdm0ef8iTTWhe6ZbXHSYRoxyIu4P7cqZuGOsITqHPSx0sQdTw9lUsg9mv38rCVx9Pl5PlkccAxgFi25Of5EHdcMy2YwDp7XaaJUDgH3dKEiZgfYV7DGijCMHS6Jnl9NsFjJ4fa5BfAnRT5xheriZmJKTmpTIhet71GesojJmZXlCuQHMSTplpXvOvZ45JYTlVuvo7qIvmPqg8KCIEUoWVeEj3u0YJVSZHZnoCqGwbXTKU");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-lg font-bold tracking-widest leading-none">HEXCORE</h1>
+<p class="text-primary text-xs font-mono tracking-widest mt-1 opacity-80">ADMIN CONSOLE</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-4 px-3 py-3 rounded hover:bg-[#1a1a1a] transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-white transition-colors">dashboard</span>
+<span class="text-gray-400 text-sm font-medium tracking-wide group-hover:text-white transition-colors">Overview</span>
+</a>
+<div class="my-2 px-3">
+<p class="text-[10px] text-[#555] font-bold uppercase tracking-widest">System</p>
+</div>
+<a class="flex items-center gap-4 px-3 py-3 rounded bg-gradient-to-r from-primary/20 to-transparent border-l-2 border-primary" href="#">
+<span class="material-symbols-outlined text-primary">shield</span>
+<span class="text-white text-sm font-bold tracking-wide">Security</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded hover:bg-[#1a1a1a] transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-white transition-colors">tune</span>
+<span class="text-gray-400 text-sm font-medium tracking-wide group-hover:text-white transition-colors">Configuration</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded hover:bg-[#1a1a1a] transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-white transition-colors">database</span>
+<span class="text-gray-400 text-sm font-medium tracking-wide group-hover:text-white transition-colors">Data Logs</span>
+</a>
+<div class="my-2 px-3">
+<p class="text-[10px] text-[#555] font-bold uppercase tracking-widest">Users</p>
+</div>
+<a class="flex items-center gap-4 px-3 py-3 rounded hover:bg-[#1a1a1a] transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-white transition-colors">group</span>
+<span class="text-gray-400 text-sm font-medium tracking-wide group-hover:text-white transition-colors">Accounts</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded hover:bg-[#1a1a1a] transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-white transition-colors">key</span>
+<span class="text-gray-400 text-sm font-medium tracking-wide group-hover:text-white transition-colors">API Keys</span>
+</a>
+</nav>
+<!-- Bottom Actions -->
+<div class="mt-auto border-t border-[#2a2a2a] pt-4 flex flex-col gap-1">
+<a class="flex items-center gap-4 px-3 py-3 rounded hover:bg-primary/10 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors">logout</span>
+<span class="text-gray-400 text-sm font-medium tracking-wide group-hover:text-primary transition-colors">Termiate Session</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col h-full relative overflow-hidden bg-background-dark">
+<!-- Background Decor -->
+<div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#110a0b] to-transparent pointer-events-none z-0"></div>
+<div class="absolute -top-40 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
+<!-- Top Header -->
+<header class="h-16 border-b border-[#2a2a2a] bg-[#0B0B0B]/90 backdrop-blur-sm flex items-center justify-between px-8 z-10 shrink-0">
+<div class="flex items-center gap-4">
+<!-- Breadcrumbs -->
+<nav class="flex items-center text-sm font-mono text-gray-500">
+<span class="hover:text-primary transition-colors cursor-pointer">SYS</span>
+<span class="mx-2 text-[#333]">/</span>
+<span class="hover:text-primary transition-colors cursor-pointer">ADMIN</span>
+<span class="mx-2 text-[#333]">/</span>
+<span class="text-white">SECURITY_PARAMS</span>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 px-3 py-1 rounded bg-primary/10 border border-primary/20">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-xs font-bold text-primary tracking-widest">SYSTEM ONLINE</span>
+</div>
+<div class="w-px h-8 bg-[#2a2a2a]"></div>
+<button class="text-gray-400 hover:text-white transition-colors relative">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full border border-black"></span>
+</button>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden sm:block">
+<p class="text-white text-sm font-bold leading-none">Cmdr. V. Raske</p>
+<p class="text-gray-500 text-[10px] uppercase tracking-wider mt-1">Level 5 Access</p>
+</div>
+<div class="bg-center bg-no-repeat bg-cover rounded size-9 border border-[#2a2a2a]" data-alt="Profile picture of a futuristic commander" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuByy6DVccY-DCAeWZnUr_BBYkJu-grpwPmPghI9i-UJVPweXDFZz9d8BSSjPKR9H_5ZmqctfrUYU8tEP_Fg-HpPR6l_vk1p-Kox8lOECuBUScI9psouraK7v-dKxX0A9wHn6nCpoTeE60n1mmY6PDFA2ezoW79-Q5098jw64R4jXswDIZzqt7UmPTfdrs6vhif5iv0um1QH1mKMwJ5WQwkZ_cxHP7UZVqxL3nqUQYQjWUXcNZu_2vkyRuIYJCw_ugnuei_tpXLdato");'></div>
+</div>
+</div>
+</header>
+<!-- Main Scrollable Area -->
+<main class="flex-1 overflow-y-auto p-8 relative z-10">
+<div class="max-w-6xl mx-auto space-y-8">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-[#2a2a2a] pb-6">
+<div>
+<h2 class="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase mb-2">Security Parameters</h2>
+<p class="text-gray-400 max-w-xl text-sm font-light">Configure system hardening protocols, firewall rules, and access control lists. Changes are logged immediately.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center h-10 px-6 border border-[#2a2a2a] bg-[#111] text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-[#1a1a1a] transition-all">
+                            Discard
+                        </button>
+<button class="flex items-center justify-center h-10 px-6 bg-primary text-white text-sm font-bold uppercase tracking-wider hover:bg-red-700 transition-all shadow-[0_0_15px_rgba(175,18,37,0.4)] glitch-hover">
+<span class="material-symbols-outlined text-[18px] mr-2">save</span>
+                            Save Changes
+                        </button>
+</div>
+</div>
+<!-- Tabs -->
+<div class="flex overflow-x-auto gap-8 border-b border-[#2a2a2a] scrollbar-hide">
+<button class="pb-3 border-b-2 border-primary text-white font-bold text-sm uppercase tracking-wide whitespace-nowrap">
+                        Access Control
+                    </button>
+<button class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-white hover:border-gray-700 transition-all font-bold text-sm uppercase tracking-wide whitespace-nowrap">
+                        Network Rules
+                    </button>
+<button class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-white hover:border-gray-700 transition-all font-bold text-sm uppercase tracking-wide whitespace-nowrap">
+                        Encryption
+                    </button>
+<button class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-white hover:border-gray-700 transition-all font-bold text-sm uppercase tracking-wide whitespace-nowrap">
+                        Audit Logs
+                    </button>
+</div>
+<!-- Settings Content -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Primary Settings -->
+<div class="lg:col-span-2 space-y-6">
+<!-- Card: Authentication -->
+<div class="bg-[#111] border border-[#2a2a2a] p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">lock_person</span>
+</div>
+<h3 class="text-white font-bold text-lg mb-1 flex items-center gap-2">
+<span class="w-1 h-4 bg-primary inline-block"></span>
+                                Authentication Protocols
+                            </h3>
+<p class="text-xs text-gray-500 mb-6 uppercase tracking-wider">Manage login strictness and methods</p>
+<div class="space-y-6">
+<!-- Setting Item -->
+<div class="flex items-center justify-between pb-4 border-b border-[#1a1a1a]">
+<div class="pr-4">
+<p class="text-white font-medium text-sm">Two-Factor Authentication (2FA)</p>
+<p class="text-gray-500 text-xs mt-1">Enforce OTP for all admin level accounts.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-[#222] peer-focus:outline-none rounded peer dark:bg-[#222] peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-gray-400 after:border-gray-300 after:border after:rounded after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary peer-checked:after:bg-white"></div>
+</label>
+</div>
+<!-- Setting Item -->
+<div class="flex items-center justify-between pb-4 border-b border-[#1a1a1a]">
+<div class="pr-4">
+<p class="text-white font-medium text-sm">Biometric Re-auth</p>
+<p class="text-gray-500 text-xs mt-1">Require fingerprint or face scan for sensitive actions.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-[#222] peer-focus:outline-none rounded peer dark:bg-[#222] peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-gray-400 after:border-gray-300 after:border after:rounded after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary peer-checked:after:bg-white"></div>
+</label>
+</div>
+<!-- Setting Item -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">Session Timeout (min)</label>
+<input class="w-full bg-[#0B0B0B] border border-[#333] text-white text-sm rounded focus:border-primary focus:ring-1 focus:ring-primary p-2.5 placeholder-gray-600 font-mono" type="number" value="15"/>
+</div>
+<div>
+<label class="block text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">Max Login Attempts</label>
+<input class="w-full bg-[#0B0B0B] border border-[#333] text-white text-sm rounded focus:border-primary focus:ring-1 focus:ring-primary p-2.5 placeholder-gray-600 font-mono" type="number" value="3"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Card: Password Policy -->
+<div class="bg-[#111] border border-[#2a2a2a] p-6">
+<h3 class="text-white font-bold text-lg mb-1 flex items-center gap-2">
+<span class="w-1 h-4 bg-primary inline-block"></span>
+                                Password Complexity
+                            </h3>
+<p class="text-xs text-gray-500 mb-6 uppercase tracking-wider">Rules for user generated secrets</p>
+<div class="grid grid-cols-2 gap-4">
+<label class="flex items-center space-x-3 p-3 border border-[#1a1a1a] bg-[#0B0B0B] rounded cursor-pointer hover:border-[#333] transition-colors">
+<input checked="" class="form-checkbox h-4 w-4 text-primary rounded bg-[#222] border-[#333] focus:ring-primary focus:ring-offset-0" type="checkbox"/>
+<span class="text-gray-300 text-sm">Require Special Char</span>
+</label>
+<label class="flex items-center space-x-3 p-3 border border-[#1a1a1a] bg-[#0B0B0B] rounded cursor-pointer hover:border-[#333] transition-colors">
+<input checked="" class="form-checkbox h-4 w-4 text-primary rounded bg-[#222] border-[#333] focus:ring-primary focus:ring-offset-0" type="checkbox"/>
+<span class="text-gray-300 text-sm">Require Numbers</span>
+</label>
+<label class="flex items-center space-x-3 p-3 border border-[#1a1a1a] bg-[#0B0B0B] rounded cursor-pointer hover:border-[#333] transition-colors">
+<input checked="" class="form-checkbox h-4 w-4 text-primary rounded bg-[#222] border-[#333] focus:ring-primary focus:ring-offset-0" type="checkbox"/>
+<span class="text-gray-300 text-sm">Mixed Case</span>
+</label>
+<label class="flex items-center space-x-3 p-3 border border-[#1a1a1a] bg-[#0B0B0B] rounded cursor-pointer hover:border-[#333] transition-colors">
+<input class="form-checkbox h-4 w-4 text-primary rounded bg-[#222] border-[#333] focus:ring-primary focus:ring-offset-0" type="checkbox"/>
+<span class="text-gray-300 text-sm">No Previous Passwords</span>
+</label>
+</div>
+<div class="mt-6 pt-4 border-t border-[#1a1a1a]">
+<button class="text-primary text-xs font-bold uppercase tracking-wider hover:text-white transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">refresh</span>
+                                    Force Reset All Passwords
+                                </button>
+</div>
+</div>
+</div>
+<!-- Right Column: Status & Secondary Info -->
+<div class="space-y-6">
+<!-- Threat Level Card -->
+<div class="bg-gradient-to-br from-[#1a0f10] to-[#111] border border-primary/30 p-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+<span class="text-primary text-xs font-bold uppercase tracking-[0.2em] mb-2 relative z-10">Threat Level</span>
+<div class="text-5xl font-black text-white mb-2 relative z-10 tracking-tighter">LOW</div>
+<div class="w-full h-1 bg-[#333] rounded-full overflow-hidden mt-2">
+<div class="w-[15%] h-full bg-green-500 shadow-[0_0_10px_#22c55e]"></div>
+</div>
+<p class="text-gray-500 text-xs mt-3">System is operating within normal parameters.</p>
+</div>
+<!-- Maintenance Mode -->
+<div class="bg-[#111] border border-[#2a2a2a] p-6">
+<div class="flex items-start justify-between mb-4">
+<div>
+<h3 class="text-white font-bold text-sm uppercase tracking-wide">Maintenance Mode</h3>
+<p class="text-gray-500 text-xs mt-1">Disables user access.</p>
+</div>
+<span class="material-symbols-outlined text-gray-600">engineering</span>
+</div>
+<div class="flex items-center justify-between bg-[#1a0507] border border-primary/20 p-3 rounded">
+<span class="text-primary font-mono text-xs font-bold">OFFLINE</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-[#333] peer-focus:outline-none rounded peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-gray-400 after:border-gray-300 after:border after:rounded after:h-4 after:w-4 after:transition-all peer-checked:bg-primary peer-checked:after:bg-white"></div>
+</label>
+</div>
+</div>
+<!-- IP Whitelist -->
+<div class="bg-[#111] border border-[#2a2a2a] p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-white font-bold text-sm uppercase tracking-wide">IP Whitelist</h3>
+<button class="text-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+</button>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between bg-[#0B0B0B] border border-[#1a1a1a] p-2 rounded">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+<span class="text-gray-300 font-mono text-xs">192.168.1.100</span>
+</div>
+<button class="text-gray-600 hover:text-red-500"><span class="material-symbols-outlined text-sm">close</span></button>
+</div>
+<div class="flex items-center justify-between bg-[#0B0B0B] border border-[#1a1a1a] p-2 rounded">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+<span class="text-gray-300 font-mono text-xs">10.0.0.45</span>
+</div>
+<button class="text-gray-600 hover:text-red-500"><span class="material-symbols-outlined text-sm">close</span></button>
+</div>
+<div class="flex items-center justify-between bg-[#0B0B0B] border border-[#1a1a1a] p-2 rounded border-l-2 border-l-primary">
+<div class="flex items-center gap-2">
+<span class="text-gray-500 font-mono text-xs">Current Session</span>
+</div>
+<span class="text-[10px] text-primary font-bold px-1 bg-primary/10 rounded">YOU</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Log -->
+<div class="mt-8 pt-6 border-t border-[#2a2a2a] flex flex-col md:flex-row justify-between items-center text-gray-600 text-xs font-mono">
+<div class="flex items-center gap-4">
+<span>HEXCORE V.2.0.4</span>
+<span class="hidden md:inline">|</span>
+<span class="hidden md:inline">SERVER: US-EAST-1</span>
+</div>
+<div class="mt-2 md:mt-0 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+<span>LATENCY: 24ms</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

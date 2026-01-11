@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEXCORE Checkout</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0a0a0a",
+                        hexblack: "#0B0B0B",
+                        hexred: "#B11226",
+                        hexneon: "#FF1E1E",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#0B0B0B",
+                        surface: "#141414",
+                        surfaceHighlight: "#1E1E1E"
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem", 
+                        "lg": "0.25rem", 
+                        "xl": "0.5rem", 
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0B0B; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B11226; 
+        }
+        
+        .cyber-input:focus {
+            box-shadow: 0 0 0 1px #FF1E1E;
+        }
+        
+        .clip-path-diagonal {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
+        }
+        
+        .clip-path-button {
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+
+        .scanline-overlay {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white min-h-screen flex flex-col overflow-x-hidden selection:bg-hexneon selection:text-black">
+<!-- Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#303030] bg-[#141414] px-6 lg:px-10 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 text-hexneon">
+<span class="material-symbols-outlined text-[32px]">hexagon</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[0.1em]">HEXCORE</h2>
+</div>
+<div class="hidden md:flex items-center gap-2">
+<span class="material-symbols-outlined text-hexneon text-sm">lock</span>
+<span class="text-xs font-bold tracking-widest text-gray-400">SECURE_CONNECTION_ESTABLISHED</span>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded bg-[#303030] text-white text-xs font-bold leading-normal tracking-widest px-4 py-2 border border-transparent hover:border-hexneon transition-colors">
+<span class="truncate">USER: GHOST_01</span>
+</button>
+</header>
+<div class="flex-1 w-full max-w-[1440px] mx-auto p-4 lg:p-8">
+<!-- Page Title -->
+<div class="mb-8 border-l-4 border-hexneon pl-4 py-2 bg-gradient-to-r from-surface to-transparent">
+<h1 class="text-white tracking-tight text-3xl lg:text-4xl font-bold uppercase">System Checkout</h1>
+<p class="text-gray-400 text-sm mt-1 tracking-widest font-mono">Process ID: #X99-2048-BC</p>
+</div>
+<div class="flex flex-col lg:flex-row gap-8 xl:gap-16">
+<!-- LEFT COLUMN: CHECKOUT FLOW -->
+<div class="flex-1 flex flex-col gap-10">
+<!-- Progress Bar -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-end">
+<p class="text-white text-sm font-bold tracking-widest uppercase">Initialization Sequence</p>
+<p class="text-hexneon text-xs font-mono">STEP 1/3</p>
+</div>
+<div class="h-1.5 w-full bg-[#333] rounded-none overflow-hidden flex">
+<div class="h-full bg-hexneon w-1/3 shadow-[0_0_10px_#FF1E1E]"></div>
+<div class="h-full bg-[#222] w-1/3 border-l border-[#000]"></div>
+<div class="h-full bg-[#222] w-1/3 border-l border-[#000]"></div>
+</div>
+<div class="flex justify-between text-[10px] text-gray-500 font-mono uppercase tracking-widest">
+<span>Coordinates</span>
+<span>Logistics</span>
+<span>Payment</span>
+</div>
+</div>
+<!-- STEP 1: SHIPPING -->
+<section class="flex flex-col gap-6 animate-fade-in">
+<div class="flex items-center gap-3 border-b border-[#333] pb-2">
+<span class="bg-hexred text-white text-xs font-bold px-2 py-1 rounded-sm">01</span>
+<h2 class="text-xl font-bold tracking-tight uppercase">// Shipping Coordinates</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-gray-400 tracking-wider uppercase">First_Name</span>
+<input class="cyber-input w-full bg-surfaceHighlight border border-[#333] text-white px-4 py-3 rounded-sm placeholder:text-gray-600 focus:outline-none focus:border-hexneon focus:ring-1 focus:ring-hexneon transition-all" placeholder="ENTER FIRST NAME" type="text" value="ALEX"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-gray-400 tracking-wider uppercase">Last_Name</span>
+<input class="cyber-input w-full bg-surfaceHighlight border border-[#333] text-white px-4 py-3 rounded-sm placeholder:text-gray-600 focus:outline-none focus:border-hexneon focus:ring-1 focus:ring-hexneon transition-all" placeholder="ENTER LAST NAME" type="text" value="MERCER"/>
+</label>
+</div>
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-gray-400 tracking-wider uppercase">Comm_Link (Email)</span>
+<div class="relative">
+<input class="cyber-input w-full bg-surfaceHighlight border border-[#333] text-white pl-10 pr-4 py-3 rounded-sm placeholder:text-gray-600 focus:outline-none focus:border-hexneon focus:ring-1 focus:ring-hexneon transition-all" placeholder="ENTER EMAIL ADDRESS" type="email"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">alternate_email</span>
+</div>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-gray-400 tracking-wider uppercase">Address_Line_01</span>
+<input class="cyber-input w-full bg-surfaceHighlight border border-[#333] text-white px-4 py-3 rounded-sm placeholder:text-gray-600 focus:outline-none focus:border-hexneon focus:ring-1 focus:ring-hexneon transition-all" placeholder="STREET ADDRESS" type="text"/>
+</label>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<label class="flex flex-col gap-2 col-span-2 md:col-span-1">
+<span class="text-xs font-bold text-gray-400 tracking-wider uppercase">Sector (City)</span>
+<input class="cyber-input w-full bg-surfaceHighlight border border-[#333] text-white px-4 py-3 rounded-sm placeholder:text-gray-600 focus:outline-none focus:border-hexneon focus:ring-1 focus:ring-hexneon transition-all" placeholder="CITY" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-gray-400 tracking-wider uppercase">Zone (State)</span>
+<input class="cyber-input w-full bg-surfaceHighlight border border-[#333] text-white px-4 py-3 rounded-sm placeholder:text-gray-600 focus:outline-none focus:border-hexneon focus:ring-1 focus:ring-hexneon transition-all" placeholder="STATE" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-gray-400 tracking-wider uppercase">Postal_Code</span>
+<input class="cyber-input w-full bg-surfaceHighlight border border-[#333] text-white px-4 py-3 rounded-sm placeholder:text-gray-600 focus:outline-none focus:border-hexneon focus:ring-1 focus:ring-hexneon transition-all" placeholder="ZIP" type="text"/>
+</label>
+</div>
+</section>
+<!-- STEP 2: SHIPPING METHOD -->
+<section class="flex flex-col gap-6 opacity-50 hover:opacity-100 transition-opacity">
+<div class="flex items-center gap-3 border-b border-[#333] pb-2">
+<span class="bg-[#333] text-gray-400 text-xs font-bold px-2 py-1 rounded-sm">02</span>
+<h2 class="text-xl font-bold tracking-tight uppercase text-gray-400">// Logistics Protocol</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Standard Option -->
+<div class="group relative cursor-pointer">
+<input checked="" class="peer sr-only" id="ship-std" name="shipping" type="radio"/>
+<label class="block bg-surfaceHighlight border border-[#333] p-4 rounded-sm peer-checked:border-hexneon peer-checked:bg-[#1a0505] transition-all h-full relative overflow-hidden" for="ship-std">
+<div class="absolute top-0 right-0 p-1">
+<span class="material-symbols-outlined text-[#333] peer-checked:text-hexneon">check_circle</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-sm font-bold uppercase tracking-widest text-white">Standard Ground</span>
+<span class="text-xs text-gray-400 font-mono">5-7 CYCLES (DAYS)</span>
+<span class="mt-2 text-lg font-bold text-white">FREE</span>
+</div>
+</label>
+</div>
+<!-- Priority Option -->
+<div class="group relative cursor-pointer">
+<input class="peer sr-only" id="ship-exp" name="shipping" type="radio"/>
+<label class="block bg-surfaceHighlight border border-[#333] p-4 rounded-sm peer-checked:border-hexneon peer-checked:bg-[#1a0505] transition-all h-full relative overflow-hidden" for="ship-exp">
+<div class="absolute top-0 right-0 p-1">
+<span class="material-symbols-outlined text-[#333] peer-checked:text-hexneon">check_circle</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-sm font-bold uppercase tracking-widest text-hexneon">Hyper-Jump (Express)</span>
+<span class="text-xs text-gray-400 font-mono">1-2 CYCLES (DAYS)</span>
+<span class="mt-2 text-lg font-bold text-white">$24.00</span>
+</div>
+</label>
+</div>
+</div>
+</section>
+<!-- STEP 3: PAYMENT -->
+<section class="flex flex-col gap-6 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all">
+<div class="flex items-center gap-3 border-b border-[#333] pb-2">
+<span class="bg-[#333] text-gray-400 text-xs font-bold px-2 py-1 rounded-sm">03</span>
+<h2 class="text-xl font-bold tracking-tight uppercase text-gray-400">// Credit Transfer</h2>
+</div>
+<div class="bg-surfaceHighlight p-6 border border-[#333] rounded-sm relative overflow-hidden">
+<!-- Pattern bg -->
+<div class="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+<div class="relative z-10 grid grid-cols-1 gap-4">
+<div class="flex gap-4 mb-2">
+<button class="flex-1 py-2 border border-hexneon bg-[#1a0505] text-hexneon text-xs font-bold uppercase tracking-wider">Credit Card</button>
+<button class="flex-1 py-2 border border-[#333] bg-transparent text-gray-500 text-xs font-bold uppercase tracking-wider hover:text-white">Crypto</button>
+</div>
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-gray-400 tracking-wider uppercase">Card Number</span>
+<div class="relative">
+<input class="cyber-input w-full bg-[#111] border border-[#333] text-white px-4 py-3 rounded-sm placeholder:text-gray-700 font-mono focus:outline-none focus:border-hexneon focus:ring-1 focus:ring-hexneon transition-all" placeholder="0000 0000 0000 0000" type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-600">credit_card</span>
+</div>
+</label>
+<div class="grid grid-cols-2 gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-gray-400 tracking-wider uppercase">Expiry</span>
+<input class="cyber-input w-full bg-[#111] border border-[#333] text-white px-4 py-3 rounded-sm placeholder:text-gray-700 font-mono focus:outline-none focus:border-hexneon focus:ring-1 focus:ring-hexneon transition-all" placeholder="MM/YY" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-gray-400 tracking-wider uppercase">CVC Code</span>
+<div class="relative">
+<input class="cyber-input w-full bg-[#111] border border-[#333] text-white px-4 py-3 rounded-sm placeholder:text-gray-700 font-mono focus:outline-none focus:border-hexneon focus:ring-1 focus:ring-hexneon transition-all" placeholder="123" type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 text-sm">lock</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN: SUMMARY -->
+<div class="w-full lg:w-[420px] shrink-0">
+<div class="sticky top-28 flex flex-col gap-6">
+<div class="bg-surfaceHighlight border border-[#333] rounded-sm p-6 relative overflow-hidden clip-path-diagonal">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold uppercase tracking-widest text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-hexneon">inventory_2</span>
+                                Manifest_Load
+                            </h3>
+<span class="bg-[#333] text-[10px] font-mono px-2 py-0.5 rounded text-gray-400">3 ITEMS</span>
+</div>
+<!-- Item 1 -->
+<div class="flex gap-4 mb-4 pb-4 border-b border-[#333] group">
+<div class="w-16 h-16 bg-black border border-[#333] rounded-sm overflow-hidden shrink-0 relative">
+<img alt="High performance graphics card with RGB lighting close up" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh-JJvWWuU_tzLRBsZYWiXuvRCatPVF8qlKPx4JQ1D7cHQGOvW_eDFeI2SyAnui5-aYlkY1T1qCTxO8V-4wqfSbx0bMBO4EFldWfD0_QFS___ZedCVbuI-sXiYF56PEDOz4EdsLNhA-jRR5rULWZJwm9ShYvYkMjP6R2mlCB6n2kwkBvY2H3rUJuwTwjqLiFwKf6ISKUpXOym_ZaqMzxCMD96kj6TFtMmU0PlTPz4gev-OqVaINIyn6M1gl27BpeDFG5x-RyE8cNs"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-white text-sm font-bold truncate pr-2">NVIDIA RTX 4090 OC</h4>
+<p class="text-white text-sm font-mono">$1,599</p>
+</div>
+<p class="text-gray-500 text-xs truncate mb-1">Architecture: Ada Lovelace</p>
+<div class="flex items-center gap-2">
+<span class="text-[10px] bg-[#222] text-gray-400 px-1 border border-[#333]">QTY: 1</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-4 mb-4 pb-4 border-b border-[#333] group">
+<div class="w-16 h-16 bg-black border border-[#333] rounded-sm overflow-hidden shrink-0 relative">
+<img alt="Computer motherboard circuit board detail with blue lighting" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFidm05BRWdWVQFfpV07F80rFpDXWmn5FpyDEt6hO5ICTpzBjXrMPMBKBLCPXHLlG9sSmR-RQpQp6Acg9H2hcjtxE5FTGYdMW5fuYp6JPB92yu4-HBi3uxDfjq2ePa_AG5IfGecTHekyU-d7-FTslVPi2-0f2q4MJBQY6zQfS6JCy2_ECCovYqXrCZn5d0VcceZU0vXVgdfG1NUIch51kCi7W7g9mYeAGtG7dY4jyQL1ohGZ1gCsbKRakimhRvkMjZXUtGbv_rEBA"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-white text-sm font-bold truncate pr-2">Z790 AORUS MASTER</h4>
+<p class="text-white text-sm font-mono">$499</p>
+</div>
+<p class="text-gray-500 text-xs truncate mb-1">Socket: LGA 1700</p>
+<div class="flex items-center gap-2">
+<span class="text-[10px] bg-[#222] text-gray-400 px-1 border border-[#333]">QTY: 1</span>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex gap-4 mb-6 group">
+<div class="w-16 h-16 bg-black border border-[#333] rounded-sm overflow-hidden shrink-0 relative">
+<img alt="Computer RAM stick with colorful RGB lighting on black background" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxjXE3Hqhoe2TjxbTureXxDRjjewsc5nnnwnh5Bp5LU3VezKGrcL3f4nSgxGjF-lkExcWeN0UDHOYPs2wTXaJ40PxHmeg2nhrzT7fIXCDvGRLEVvWOyLCs_cFUFXCz07O_qYtS5hh1WccFZKi-j9BYOe4uot4hcfozPC36szH1_W_vw_V8LdWFR7RONZ5PtamoPCxW55mxDf5MlV9E63ypuDKTODooM6m0jL-X78FvCh_8IsWEyAaGrbIkagJ-10l928k0YUMO_U0"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-white text-sm font-bold truncate pr-2">DOMINATOR 64GB DDR5</h4>
+<p class="text-white text-sm font-mono">$329</p>
+</div>
+<p class="text-gray-500 text-xs truncate mb-1">Speed: 6000MHz</p>
+<div class="flex items-center gap-2">
+<span class="text-[10px] bg-[#222] text-gray-400 px-1 border border-[#333]">QTY: 1</span>
+</div>
+</div>
+</div>
+<!-- Promo Code -->
+<div class="flex gap-2 mb-6">
+<input class="flex-1 bg-black border border-[#333] px-3 py-2 text-xs text-white placeholder:text-gray-600 font-mono focus:border-hexneon focus:outline-none" placeholder="ACCESS_CODE" type="text"/>
+<button class="bg-[#222] hover:bg-[#333] text-white px-3 py-2 border border-[#333] text-xs font-bold uppercase transition-colors">Apply</button>
+</div>
+<!-- Totals -->
+<div class="flex flex-col gap-2 pt-4 border-t border-[#333]">
+<div class="flex justify-between text-sm text-gray-400">
+<span>SUBTOTAL</span>
+<span class="font-mono text-white">$2,427.00</span>
+</div>
+<div class="flex justify-between text-sm text-gray-400">
+<span>TAX (EST.)</span>
+<span class="font-mono text-white">$194.16</span>
+</div>
+<div class="flex justify-between text-sm text-gray-400">
+<span>SHIPPING</span>
+<span class="font-mono text-hexneon">FREE</span>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-dashed border-[#333]">
+<div class="flex justify-between items-end mb-6">
+<span class="text-base font-bold text-white uppercase tracking-wider">Total_Cost</span>
+<span class="text-2xl font-bold text-hexneon font-mono tracking-tighter">$2,621.16</span>
+</div>
+<button class="group w-full relative bg-hexred hover:bg-[#D4152D] text-white h-14 font-bold text-lg tracking-[0.15em] transition-all clip-path-button overflow-hidden">
+<div class="absolute inset-0 w-full h-full bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.1)_50%,transparent_75%)] bg-[length:250%_250%] animate-[shimmer_3s_infinite]"></div>
+<span class="relative z-10 flex items-center justify-center gap-3">
+                                    INITIATE TRANSACTION
+                                    <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</span>
+</button>
+<div class="flex justify-center mt-3 gap-4 opacity-50">
+<span class="material-symbols-outlined text-gray-500 text-lg">lock</span>
+<span class="material-symbols-outlined text-gray-500 text-lg">verified_user</span>
+<span class="material-symbols-outlined text-gray-500 text-lg">shield</span>
+</div>
+</div>
+</div>
+<!-- Help Widget -->
+<div class="bg-[#111] border border-[#222] p-4 rounded-sm flex items-start gap-3">
+<span class="material-symbols-outlined text-hexneon">support_agent</span>
+<div>
+<h4 class="text-white text-xs font-bold uppercase mb-1">Need Reinforcements?</h4>
+<p class="text-gray-500 text-xs">Our tech division is on standby. <a class="text-white hover:text-hexneon underline decoration-hexneon underline-offset-2" href="#">Open Comm Link</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Scanline Effect -->
+<div class="fixed bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-hexneon to-transparent opacity-50"></div>
+</body></html>

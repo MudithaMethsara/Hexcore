@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEXCORE Admin - Add Product</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a0a0a",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#0B0B0B", 
+                        "hex-bg": "#0B0B0B",
+                        "hex-surface": "#121212",
+                        "hex-border": "#333333",
+                        "hex-red": "#FF1E1E",
+                        "hex-red-dark": "#B11226",
+                        "hex-text": "#FFFFFF",
+                        "hex-muted": "#666666",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "2px", "lg": "4px", "xl": "8px", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for the cyber feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0B0B0B; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF1E1E; }
+        
+        .cyber-input {
+            background-color: #121212;
+            border: 1px solid #333;
+            color: white;
+            transition: all 0.2s ease;
+        }
+        .cyber-input:focus {
+            border-color: #FF1E1E;
+            box-shadow: 0 0 0 1px #FF1E1E; /* Glow effect */
+            outline: none;
+        }
+        .cyber-card {
+            background-color: #121212;
+            border: 1px solid #222;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-hex-bg text-hex-text overflow-x-hidden min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-hex-border bg-hex-bg px-8 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 text-hex-red">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-wider uppercase">HEXCORE <span class="text-hex-red">ADMIN</span></h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<div class="hidden md:flex items-center gap-2 text-hex-muted text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">wifi_tethering</span>
+<span>SYSTEM ONLINE</span>
+</div>
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded h-full group">
+<div class="text-[#ababab] flex border border-hex-border border-r-0 bg-hex-surface items-center justify-center pl-3 rounded-l group-focus-within:border-hex-red group-focus-within:text-hex-red transition-colors">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded rounded-l-none text-white focus:outline-0 focus:ring-0 bg-hex-surface border border-hex-border border-l-0 placeholder:text-[#ababab] px-3 text-sm font-normal leading-normal transition-colors focus:border-hex-red" placeholder="Search catalog..." value=""/>
+</div>
+</label>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-hex-border cursor-pointer hover:ring-hex-red transition-all" data-alt="User profile avatar with cyberpunk neon styling" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBHOgX4MWkXvl5PChIL1f7IrtHU2YUYiwc_jn0KKWByrYrbG5R5FmBrwPm77kvTkvlQPplhY6MoLd23_Dnm9nG0csgbXQJ4R_IkSOE1zp8sdALzQRezQYwsQ8xvdZPKYpm3YtmAhcA8gtm5D_D2R6dbsUb9qMSL6mQ9UXz27xti-gRc_DEm-pG4yZuYaWeawJquhMU9ijvywaR9C6AFNCpAF8ZX7EYmRsp7Ezj3xV5wUOBlTYxkAhECLb-UYvd-qh6YJ6Hf5K0M7Wo");'></div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-[1440px] mx-auto p-4 md:p-8">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 mb-6">
+<a class="text-[#ababab] hover:text-hex-red transition-colors text-sm font-medium leading-normal flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span> Dashboard
+            </a>
+<span class="text-[#444] text-sm font-medium leading-normal">/</span>
+<a class="text-[#ababab] hover:text-hex-red transition-colors text-sm font-medium leading-normal" href="#">Inventory</a>
+<span class="text-[#444] text-sm font-medium leading-normal">/</span>
+<span class="text-hex-red text-sm font-bold leading-normal">Initialize Product</span>
+</div>
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between items-end gap-4 mb-8 border-b border-hex-border pb-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-white text-3xl md:text-5xl font-bold leading-tight tracking-tight uppercase">Initialize New Product</h1>
+<p class="text-[#ababab] text-base font-normal leading-normal flex items-center gap-2">
+<span class="w-2 h-2 bg-hex-red rounded-full animate-pulse"></span>
+                    Enter technical specifications for HEXCORE catalog entry.
+                </p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 text-sm font-bold text-[#ababab] hover:text-white border border-transparent hover:border-hex-border rounded uppercase tracking-wide transition-all">Discard</button>
+<button class="px-6 py-2 text-sm font-bold text-white bg-hex-surface border border-hex-border hover:border-hex-red hover:text-hex-red rounded uppercase tracking-wide transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span> Save Draft
+                </button>
+<button class="px-6 py-2 text-sm font-bold text-white bg-hex-red hover:bg-hex-red-dark rounded uppercase tracking-wide transition-all shadow-[0_0_15px_rgba(255,30,30,0.3)] flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span> Publish
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Media -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Dropzone -->
+<div class="cyber-card p-1 rounded-lg">
+<div class="bg-hex-bg border border-dashed border-[#444] hover:border-hex-red transition-colors rounded p-8 flex flex-col items-center justify-center gap-4 text-center group cursor-pointer h-80">
+<div class="size-16 rounded-full bg-[#1a1a1a] flex items-center justify-center group-hover:bg-[#2a1010] transition-colors">
+<span class="material-symbols-outlined text-4xl text-[#666] group-hover:text-hex-red transition-colors">cloud_upload</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-white text-lg font-bold">DROP VISUAL DATA</p>
+<p class="text-[#666] text-sm">Support: PNG, JPG, WEBP (Max 50MB)</p>
+</div>
+<button class="mt-2 px-4 py-2 bg-[#222] hover:bg-[#333] text-white text-xs font-bold tracking-wider uppercase rounded transition-colors">
+                            Browse Files
+                        </button>
+</div>
+</div>
+<!-- Gallery Preview -->
+<div class="cyber-card p-4 rounded-lg">
+<h3 class="text-white text-sm font-bold mb-4 uppercase tracking-wide border-l-2 border-hex-red pl-3">Asset Gallery</h3>
+<div class="grid grid-cols-3 gap-3">
+<!-- Empty slots -->
+<div class="aspect-square bg-[#1a1a1a] rounded border border-[#333] flex items-center justify-center text-[#333]">1</div>
+<div class="aspect-square bg-[#1a1a1a] rounded border border-[#333] flex items-center justify-center text-[#333]">2</div>
+<div class="aspect-square bg-[#1a1a1a] rounded border border-[#333] flex items-center justify-center text-[#333]">3</div>
+<div class="aspect-square bg-[#1a1a1a] rounded border border-[#333] flex items-center justify-center text-[#333]">4</div>
+<div class="aspect-square bg-[#1a1a1a] rounded border border-[#333] flex items-center justify-center text-[#333]">5</div>
+<div class="aspect-square bg-[#1a1a1a] rounded border border-[#333] flex items-center justify-center text-[#333]">6</div>
+</div>
+</div>
+<!-- Status Card -->
+<div class="cyber-card p-6 rounded-lg flex flex-col gap-4">
+<h3 class="text-white text-sm font-bold uppercase tracking-wide border-l-2 border-hex-red pl-3">Visibility Status</h3>
+<div class="flex items-center justify-between p-3 bg-[#1a1a1a] rounded border border-[#333]">
+<div class="flex flex-col">
+<span class="text-white text-sm font-bold">Public Catalog</span>
+<span class="text-[#666] text-xs">Visible to all customers</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer checked:right-0 checked:border-hex-red" id="toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-[#333] cursor-pointer" for="toggle"></label>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[#888] text-xs font-bold uppercase tracking-wider">Launch Date</label>
+<input class="cyber-input w-full rounded p-2 text-sm text-[#ababab]" type="date"/>
+</div>
+</div>
+</div>
+<!-- Right Column: Data Form -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Core Info Section -->
+<div class="cyber-card p-6 md:p-8 rounded-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-9xl">memory</span>
+</div>
+<h3 class="text-white text-lg font-bold mb-6 uppercase tracking-wide flex items-center gap-2">
+<span class="material-symbols-outlined text-hex-red">dns</span> Core Specifications
+                    </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="col-span-1 md:col-span-2">
+<label class="block text-[#888] text-xs font-bold uppercase tracking-wider mb-2">Product Title</label>
+<input class="cyber-input w-full rounded p-3 text-white placeholder-[#444]" placeholder="e.g. HEXCORE TITAN RTX 4090 OC" type="text"/>
+</div>
+<div class="col-span-1">
+<label class="block text-[#888] text-xs font-bold uppercase tracking-wider mb-2">SKU ID</label>
+<div class="flex gap-2">
+<input class="cyber-input flex-1 rounded p-3 text-white font-mono" type="text" value="HEX-GPU-001"/>
+<button class="px-3 bg-[#222] border border-[#333] text-white hover:text-hex-red rounded transition-colors" title="Generate New SKU">
+<span class="material-symbols-outlined text-lg">autorenew</span>
+</button>
+</div>
+</div>
+<div class="col-span-1">
+<label class="block text-[#888] text-xs font-bold uppercase tracking-wider mb-2">Brand / Manufacturer</label>
+<div class="relative">
+<select class="cyber-input w-full rounded p-3 text-white appearance-none cursor-pointer">
+<option>NVIDIA</option>
+<option>AMD</option>
+<option>INTEL</option>
+<option>ASUS ROG</option>
+<option>MSI</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-[#888]">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2">
+<label class="block text-[#888] text-xs font-bold uppercase tracking-wider mb-2">Product Categories &amp; Tags</label>
+<div class="cyber-input w-full rounded p-3 min-h-[50px] flex flex-wrap gap-2">
+<span class="bg-hex-red/20 text-hex-red border border-hex-red/50 px-2 py-1 rounded text-xs font-bold flex items-center gap-1">
+                                    GPU <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-white">close</span>
+</span>
+<span class="bg-[#333] text-white border border-[#444] px-2 py-1 rounded text-xs font-bold flex items-center gap-1">
+                                    Gaming <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-hex-red">close</span>
+</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm p-0 text-white placeholder-[#444] w-32" placeholder="+ Add tag..." type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Pricing & Inventory -->
+<div class="cyber-card p-6 md:p-8 rounded-lg">
+<h3 class="text-white text-lg font-bold mb-6 uppercase tracking-wide flex items-center gap-2">
+<span class="material-symbols-outlined text-hex-red">payments</span> Market Data
+                    </h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="col-span-1">
+<label class="block text-[#888] text-xs font-bold uppercase tracking-wider mb-2">Base Price ($)</label>
+<input class="cyber-input w-full rounded p-3 text-white" placeholder="0.00" type="number"/>
+</div>
+<div class="col-span-1">
+<label class="block text-[#888] text-xs font-bold uppercase tracking-wider mb-2">Discount Price ($)</label>
+<input class="cyber-input w-full rounded p-3 text-white" placeholder="0.00" type="number"/>
+</div>
+<div class="col-span-1">
+<label class="block text-[#888] text-xs font-bold uppercase tracking-wider mb-2">Stock Quantity</label>
+<input class="cyber-input w-full rounded p-3 text-white" placeholder="0" type="number"/>
+</div>
+</div>
+</div>
+<!-- Tech Specs Builder -->
+<div class="cyber-card p-6 md:p-8 rounded-lg">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-white text-lg font-bold uppercase tracking-wide flex items-center gap-2">
+<span class="material-symbols-outlined text-hex-red">settings_input_component</span> Technical Matrix
+                        </h3>
+<button class="text-xs font-bold text-hex-red hover:text-white uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">add</span> Add Row
+                        </button>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Header -->
+<div class="grid grid-cols-12 gap-4 px-3 py-2 bg-[#1a1a1a] border-b border-[#333] text-[#666] text-xs font-bold uppercase tracking-wider">
+<div class="col-span-4">Specification</div>
+<div class="col-span-7">Value</div>
+<div class="col-span-1"></div>
+</div>
+<!-- Row 1 -->
+<div class="grid grid-cols-12 gap-4 items-center">
+<div class="col-span-4">
+<input class="cyber-input w-full rounded p-2 text-sm" type="text" value="VRAM Size"/>
+</div>
+<div class="col-span-7">
+<input class="cyber-input w-full rounded p-2 text-sm text-[#ababab]" type="text" value="24GB GDDR6X"/>
+</div>
+<div class="col-span-1 flex justify-center">
+<button class="text-[#444] hover:text-hex-red transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-12 gap-4 items-center">
+<div class="col-span-4">
+<input class="cyber-input w-full rounded p-2 text-sm" type="text" value="Clock Speed"/>
+</div>
+<div class="col-span-7">
+<input class="cyber-input w-full rounded p-2 text-sm text-[#ababab]" type="text" value="2520 MHz (Boost)"/>
+</div>
+<div class="col-span-1 flex justify-center">
+<button class="text-[#444] hover:text-hex-red transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="grid grid-cols-12 gap-4 items-center">
+<div class="col-span-4">
+<input class="cyber-input w-full rounded p-2 text-sm" type="text" value="Interface"/>
+</div>
+<div class="col-span-7">
+<input class="cyber-input w-full rounded p-2 text-sm text-[#ababab]" type="text" value="PCI-Express 4.0 x16"/>
+</div>
+<div class="col-span-1 flex justify-center">
+<button class="text-[#444] hover:text-hex-red transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Description -->
+<div class="cyber-card p-6 md:p-8 rounded-lg">
+<h3 class="text-white text-lg font-bold mb-6 uppercase tracking-wide flex items-center gap-2">
+<span class="material-symbols-outlined text-hex-red">description</span> Narrative
+                    </h3>
+<div class="flex flex-col border border-[#333] rounded overflow-hidden">
+<div class="bg-[#1a1a1a] border-b border-[#333] p-2 flex gap-2">
+<button class="p-1 hover:bg-[#333] rounded text-white"><span class="material-symbols-outlined text-sm">format_bold</span></button>
+<button class="p-1 hover:bg-[#333] rounded text-white"><span class="material-symbols-outlined text-sm">format_italic</span></button>
+<button class="p-1 hover:bg-[#333] rounded text-white"><span class="material-symbols-outlined text-sm">format_list_bulleted</span></button>
+<div class="w-px h-6 bg-[#333] mx-1"></div>
+<button class="p-1 hover:bg-[#333] rounded text-white"><span class="material-symbols-outlined text-sm">link</span></button>
+</div>
+<textarea class="bg-[#121212] w-full p-4 text-white text-sm min-h-[150px] border-none focus:ring-0" placeholder="Describe the product technical capabilities..."></textarea>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-8 border-t border-[#222] py-8 text-center text-[#444] text-xs font-mono uppercase">
+        HEXCORE ADMIN PANEL V2.4.0 // SECURE CONNECTION ESTABLISHED
+    </footer>
+<style>
+        /* Custom toggle styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #FF1E1E;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #B11226;
+        }
+    </style>
+</body></html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEXCORE // 404 Critical Error</title>
+<!-- Material Symbols Link -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff1f1f",
+                        "background-light": "#f8f5f5",
+                        "background-dark": "#0B0B0B", /* Overridden to match specific request */
+                        "secondary-dark": "#181010",
+                        "accent-red": "#B11226",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "mono": ["Space Grotesk", "monospace"], /* Using Space Grotesk for mono feel due to geometric nature */
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #202020 1px, transparent 1px), linear-gradient(to bottom, #202020 1px, transparent 1px)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom static glitch effect styles since keyframe animations are restricted */
+        .glitch-text {
+            position: relative;
+            text-shadow: 2px 0 #ff1f1f, -2px 0 #00ffff;
+        }
+        
+        /* Scanline effect */
+        .scanlines {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .crt-overlay {
+            background: radial-gradient(circle, rgba(18, 16, 16, 0) 60%, rgba(0, 0, 0, 0.6) 100%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 11;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-white font-display overflow-x-hidden min-h-screen flex flex-col relative selection:bg-primary selection:text-white">
+<!-- Background Effects -->
+<div class="fixed inset-0 bg-grid-pattern bg-[size:40px_40px] opacity-20 pointer-events-none z-0"></div>
+<div class="fixed inset-0 bg-gradient-to-b from-transparent via-background-dark/80 to-background-dark pointer-events-none z-0"></div>
+<div class="scanlines fixed inset-0 z-50 pointer-events-none h-full w-full"></div>
+<div class="crt-overlay fixed inset-0 z-50 pointer-events-none h-full w-full"></div>
+<!-- Navigation -->
+<header class="relative z-20 w-full border-b border-[#3a2727]/50 bg-[#0B0B0B]/80 backdrop-blur-sm">
+<div class="max-w-[1440px] mx-auto px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary flex items-center justify-center">
+<svg class="w-full h-full drop-shadow-[0_0_8px_rgba(255,31,31,0.6)]" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold tracking-widest leading-none">HEXCORE</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end items-center gap-8">
+<nav class="flex items-center gap-8">
+<a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium tracking-wide" href="#">SHOP</a>
+<a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium tracking-wide" href="#">BUILD</a>
+<a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium tracking-wide" href="#">SUPPORT</a>
+</nav>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded bg-[#1e1515] border border-[#3a2727] text-gray-300 hover:bg-primary hover:text-white hover:border-primary transition-all h-10 w-10">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+</button>
+<button class="flex items-center justify-center rounded bg-[#1e1515] border border-[#3a2727] text-gray-300 hover:bg-primary hover:text-white hover:border-primary transition-all h-10 w-10">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</button>
+</div>
+</div>
+<!-- Mobile Menu Button -->
+<button class="md:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="relative z-10 flex-grow flex flex-col items-center justify-center w-full px-4 py-12 md:py-20">
+<div class="max-w-4xl w-full flex flex-col items-center gap-10">
+<!-- 404 Heading Section -->
+<div class="text-center relative">
+<div class="absolute -inset-10 bg-primary/5 blur-[100px] rounded-full pointer-events-none"></div>
+<h1 class="text-[120px] md:text-[180px] font-black leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600 glitch-text select-none">
+                    404
+                </h1>
+<div class="flex flex-col items-center gap-4 mt-2">
+<div class="px-3 py-1 bg-primary/20 border border-primary/50 rounded text-primary text-sm font-bold tracking-[0.2em]">
+                        CRITICAL ERROR // CODE: RED
+                    </div>
+<h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight uppercase">
+                        System Failure Imminent
+                    </h2>
+<p class="text-[#bc9a9a] max-w-lg text-center text-base md:text-lg">
+                        The component you are attempting to access has been disconnected, corrupted, or destroyed by enemy fire.
+                    </p>
+</div>
+</div>
+<!-- Terminal / Description List -->
+<div class="w-full max-w-2xl bg-[#110a0a]/90 border border-[#3a2727] rounded-lg overflow-hidden shadow-2xl backdrop-blur-md">
+<div class="bg-[#1e1515] px-4 py-2 border-b border-[#3a2727] flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+<span class="ml-2 text-xs text-gray-500 font-mono">SYS_DIAGNOSTIC_TOOL_V.4.0.4</span>
+</div>
+<div class="p-6 grid gap-y-4 font-mono text-sm md:text-base">
+<div class="grid grid-cols-[30%_1fr] md:grid-cols-[25%_1fr] gap-4 items-baseline border-b border-[#3a2727]/30 pb-3 last:border-0 last:pb-0">
+<span class="text-primary font-bold opacity-80">&gt; DATABASE</span>
+<span class="text-gray-300">SEARCHING SECTORS... <span class="text-primary font-bold">0 MATCHES</span></span>
+</div>
+<div class="grid grid-cols-[30%_1fr] md:grid-cols-[25%_1fr] gap-4 items-baseline border-b border-[#3a2727]/30 pb-3 last:border-0 last:pb-0">
+<span class="text-primary font-bold opacity-80">&gt; PROTOCOL</span>
+<span class="text-gray-300">SAFE_MODE: <span class="text-white bg-red-900/40 px-1">DISENGAGED</span></span>
+</div>
+<div class="grid grid-cols-[30%_1fr] md:grid-cols-[25%_1fr] gap-4 items-baseline border-b border-[#3a2727]/30 pb-3 last:border-0 last:pb-0">
+<span class="text-primary font-bold opacity-80">&gt; USER STATUS</span>
+<span class="text-gray-300 animate-pulse">LOST_SIGNAL_DETECTED</span>
+</div>
+<div class="grid grid-cols-[30%_1fr] md:grid-cols-[25%_1fr] gap-4 items-baseline">
+<span class="text-primary font-bold opacity-80">&gt; ACTION</span>
+<span class="text-gray-300">RECOMMEND IMMEDIATE SYSTEM REBOOT</span>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<div class="flex justify-center w-full pt-4">
+<button class="group relative flex items-center justify-center gap-3 px-8 py-4 bg-primary hover:bg-[#d61a1a] text-white rounded font-bold text-lg tracking-wider transition-all duration-200 shadow-[0_0_20px_rgba(255,31,31,0.3)] hover:shadow-[0_0_35px_rgba(255,31,31,0.5)] overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12"></div>
+<span class="material-symbols-outlined text-[24px]">power_settings_new</span>
+<span>INITIATE REBOOT</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="relative z-20 w-full border-t border-[#3a2727]/30 bg-[#0B0B0B]">
+<div class="max-w-[1440px] mx-auto px-6 py-10 flex flex-col items-center gap-6">
+<div class="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+<a class="text-[#bc9a9a] hover:text-white transition-colors text-sm font-medium tracking-wide flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px]">support_agent</span> SUPPORT
+                </a>
+<a class="text-[#bc9a9a] hover:text-white transition-colors text-sm font-medium tracking-wide flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px]">forum</span> DISCORD
+                </a>
+<a class="text-[#bc9a9a] hover:text-white transition-colors text-sm font-medium tracking-wide flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px]">storefront</span> SHOP
+                </a>
+</div>
+<div class="h-px w-24 bg-[#3a2727]"></div>
+<p class="text-[#563939] text-xs font-normal">© 2024 HEXCORE SYSTEMS. ALL RIGHTS RESERVED.</p>
+</div>
+</footer>
+</body></html>

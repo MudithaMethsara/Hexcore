@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEXCORE Order Success</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0B0B0B",
+                        "secondary": "#1A1A1A",
+                        "accent": "#FF1E1E",
+                        "accent-dark": "#B11226",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#0B0B0B",
+                        "surface-dark": "#141414",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    backgroundImage: {
+                        'hex-pattern': "url(\"data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 0l10.392 6v12L12 24 1.608 18V6L12 0z' fill='%231a1a1a' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom glow effects for that gamer feel */
+        .neon-text {
+            text-shadow: 0 0 10px rgba(255, 30, 30, 0.7);
+        }
+        .neon-box {
+            box-shadow: 0 0 15px rgba(255, 30, 30, 0.15);
+        }
+        .clip-corner {
+            clip-path: polygon(
+                0 0,
+                100% 0,
+                100% calc(100% - 10px),
+                calc(100% - 10px) 100%,
+                0 100%
+            );
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-white font-display overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col group/design-root">
+<!-- Background decorative elements -->
+<div class="fixed inset-0 z-0 pointer-events-none opacity-20 bg-hex-pattern"></div>
+<div class="fixed top-0 left-0 w-full h-32 bg-gradient-to-b from-accent/10 to-transparent z-0 pointer-events-none"></div>
+<div class="layout-container flex h-full grow flex-col z-10">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-surface-dark bg-primary/90 backdrop-blur-md px-6 lg:px-10 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 text-accent flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">hexagon</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[0.1em] neon-text">HEXCORE</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<div class="flex items-center gap-9">
+<a class="text-gray-400 hover:text-accent hover:neon-text text-sm font-medium transition-colors" href="#">SHOP</a>
+<a class="text-gray-400 hover:text-accent hover:neon-text text-sm font-medium transition-colors" href="#">SUPPORT</a>
+<a class="text-gray-400 hover:text-accent hover:neon-text text-sm font-medium transition-colors" href="#">COMMUNITY</a>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-sm size-10 bg-surface-dark hover:bg-surface-dark/80 text-white transition-all border border-transparent hover:border-accent/50">
+<span class="material-symbols-outlined">person</span>
+</button>
+<button class="flex items-center justify-center rounded-sm size-10 bg-surface-dark hover:bg-surface-dark/80 text-white transition-all border border-transparent hover:border-accent/50 relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<div class="absolute top-1 right-1 size-2 bg-accent rounded-full animate-pulse"></div>
+</button>
+</div>
+</div>
+<!-- Mobile Menu Icon -->
+<button class="md:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<div class="flex flex-1 justify-center py-10 px-4 md:px-10">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1 gap-8">
+<!-- Hero Status Section -->
+<div class="flex flex-col items-center gap-4 py-8 text-center animate-fade-in-up">
+<div class="relative">
+<div class="absolute inset-0 bg-accent/20 blur-[30px] rounded-full"></div>
+<span class="material-symbols-outlined text-accent text-[80px] relative z-10 neon-text">verified</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white uppercase neon-text">System Secured</h1>
+<p class="text-gray-400 text-base md:text-lg max-w-[500px]">Your requisition has been authorized. Prepare for deployment.</p>
+</div>
+<div class="mt-4 py-2 px-6 bg-surface-dark border border-surface-dark rounded-full flex items-center gap-3">
+<span class="text-gray-500 text-sm tracking-widest">ORDER ID</span>
+<span class="text-accent font-mono font-bold tracking-wider">#HEX-88291</span>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface-dark border border-gray-800 rounded-lg p-6 md:p-8 neon-box">
+<div class="flex flex-col gap-6">
+<div class="flex justify-between items-end">
+<p class="text-white text-lg font-bold tracking-wider">STATUS LOG</p>
+<p class="text-accent text-sm font-bold animate-pulse">CONFIRMED</p>
+</div>
+<!-- Visual Bar -->
+<div class="relative h-2 bg-gray-800 rounded-full w-full overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-accent w-[25%] shadow-[0_0_10px_#FF1E1E]"></div>
+</div>
+<!-- Steps -->
+<div class="flex justify-between text-xs md:text-sm font-medium tracking-wide">
+<div class="text-white flex flex-col gap-1">
+<span>ORDERED</span>
+<span class="text-gray-500 font-mono text-[10px]">OCT 21</span>
+</div>
+<div class="text-gray-500 flex flex-col gap-1 items-center">
+<span>PROCESSING</span>
+<span class="text-gray-600 font-mono text-[10px]">PENDING</span>
+</div>
+<div class="text-gray-500 flex flex-col gap-1 items-center">
+<span>SHIPPED</span>
+<span class="text-gray-600 font-mono text-[10px]">---</span>
+</div>
+<div class="text-gray-500 flex flex-col gap-1 items-end">
+<span>DELIVERED</span>
+<span class="text-gray-600 font-mono text-[10px]">EST OCT 24</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Left Column: Shipping Info -->
+<div class="lg:col-span-1 flex flex-col gap-6">
+<div class="bg-surface-dark border border-gray-800 p-6 rounded-lg h-full flex flex-col gap-4">
+<div class="flex items-center gap-2 pb-2 border-b border-gray-800">
+<span class="material-symbols-outlined text-accent text-xl">local_shipping</span>
+<h3 class="text-white font-bold tracking-wide">DEPLOYMENT TARGET</h3>
+</div>
+<div class="flex flex-col gap-1 text-sm text-gray-300">
+<p class="font-bold text-white">Alex "Wraith" Mercer</p>
+<p>sector 7G, Unit 404</p>
+<p>Neo Tokyo, NT 2077</p>
+<p>United Federation</p>
+</div>
+<div class="mt-4 pt-4 border-t border-gray-800">
+<p class="text-xs text-gray-500 uppercase tracking-widest mb-1">Method</p>
+<p class="text-sm text-white">Hyper-Velocity Ground (2-3 Days)</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Order Items -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<div class="bg-surface-dark border border-gray-800 p-6 rounded-lg">
+<div class="flex items-center justify-between pb-4 border-b border-gray-800 mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-accent text-xl">inventory_2</span>
+<h3 class="text-white font-bold tracking-wide">MISSION LOADOUT</h3>
+</div>
+<span class="text-xs text-gray-500">2 ITEMS</span>
+</div>
+<!-- Item 1 -->
+<div class="flex gap-4 mb-6">
+<div class="w-20 h-20 bg-gray-800 rounded-md overflow-hidden shrink-0 border border-gray-700">
+<div class="w-full h-full bg-cover bg-center" data-alt="Close up of a high-end black computer graphics card with red lighting details" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBix5v12XGuIZrS6N7LsP82F9uXOioY3I5wAMhPOb5BmqXlF0QOgNLbDlxV-rWZgWsq9x8NZJFuIMOHw6oMFw9qob4ZnvqEPYxH83wSMVBXyaw2BskV7ZPzFAuxhA5DCskJEBwrMFU6D9QRC7H9H89dKg9tFs0CRemJL4Qplg3N4NmxBFdviseuoj8C54Zr6p8wNzUkYBEnXjb6wLdr2vNenE9ETxUaJHf-0O_IxnMmhyGxIXVVKELjgfUExGnuewMd9jlePRwgZp0');"></div>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h4 class="text-white font-bold leading-tight">HEXCORE RTX 4090 OC</h4>
+<p class="text-gray-500 text-xs mt-1">VRAM: 24GB // ED: TITANIUM</p>
+</div>
+<p class="text-white font-mono">$1,599.00</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-4 mb-6">
+<div class="w-20 h-20 bg-gray-800 rounded-md overflow-hidden shrink-0 border border-gray-700">
+<div class="w-full h-full bg-cover bg-center" data-alt="Mechanical gaming keyboard with RGB backlighting in a dark room" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAGJwnNcKNR8xh9THmPDSXpjOHT9n1q7gadAzZxTAL9R3qkytOq8fkjlIYr9CcFLVXxplIxFCgJqOHjr_x6YBG2ocDXDKXbtRSJE7m15laooZoPRgMWxYbk9gs1BOUKl6zUzQV_EW_5VRfi85aXdCkiRp7XS9BpxrGajEy8u_2qYR7Dqu54dg_dnUcte3_y2q8a4-IWwq2HkKcxVmJ3u57jeWWdspYs8OQsNpFd44jddmaIlAVIqj0R94sEQsE_BiIKQLrVHaGU0os');"></div>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h4 class="text-white font-bold leading-tight">MechStrike Pro Keyboard</h4>
+<p class="text-gray-500 text-xs mt-1">SWITCH: RED // LAYOUT: 60%</p>
+</div>
+<p class="text-white font-mono">$129.00</p>
+</div>
+</div>
+<!-- Total Calculation -->
+<div class="border-t border-gray-800 pt-4 mt-2 flex flex-col gap-2">
+<div class="flex justify-between text-sm text-gray-400">
+<span>Subtotal</span>
+<span>$1,728.00</span>
+</div>
+<div class="flex justify-between text-sm text-gray-400">
+<span>Shipping</span>
+<span>$0.00</span>
+</div>
+<div class="flex justify-between text-sm text-gray-400">
+<span>Tax</span>
+<span>$138.24</span>
+</div>
+<div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-800/50">
+<span class="text-white font-bold uppercase tracking-wider">Total Authorization</span>
+<span class="text-accent text-xl font-bold font-mono">$1,866.24</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col md:flex-row gap-4 justify-center mt-8 pb-10">
+<button class="clip-corner relative overflow-hidden bg-accent hover:bg-accent-dark text-white h-12 px-8 flex items-center justify-center gap-2 font-bold tracking-wider transition-all duration-300 group min-w-[200px]">
+<span class="material-symbols-outlined group-hover:-translate-y-1 transition-transform duration-300">download</span>
+<span>DOWNLOAD INVOICE</span>
+</button>
+<button class="clip-corner border border-gray-700 hover:border-white bg-transparent text-white h-12 px-8 flex items-center justify-center gap-2 font-bold tracking-wider transition-all duration-300 hover:bg-white/5 min-w-[200px]">
+<span>CONTINUE SHOPPING</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="border-t border-surface-dark bg-primary py-8 mt-auto">
+<div class="max-w-[960px] mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 text-gray-500">
+<span class="material-symbols-outlined">hexagon</span>
+<span class="text-xs font-mono tracking-widest">HEXCORE SYSTEMS © 2024</span>
+</div>
+<div class="flex gap-6">
+<a class="text-gray-500 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">chat</span></a> <!-- Placeholder for social -->
+<a class="text-gray-500 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+<a class="text-gray-500 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">help</span></a>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

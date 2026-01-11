@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HEXCORE Admin Orders</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff1f1f", // Bright Red Accent
+                        "secondary": "#B11226", // Darker Red
+                        "background-dark": "#0B0B0B", // Deep Black
+                        "surface-dark": "#161616", // Slightly Lighter Black for Cards
+                        "surface-accent": "#1F1F1F", // Hover states
+                        "text-dim": "#888888",
+                        "border-color": "#333333",
+                        "danger": "#FF1E1E",
+                        "success": "#00FF94",
+                        "warning": "#FFB800",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Space Grotesk", "sans-serif"], // Enforcing Space Grotesk for the cyber feel
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f1f1f 1px, transparent 1px), linear-gradient(to bottom, #1f1f1f 1px, transparent 1px)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for cyber aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0B0B; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 0px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B11226; 
+        }
+        
+        /* Glitch effect utility */
+        .cyber-glitch:hover {
+            text-shadow: 2px 0 #ff1f1f, -2px 0 #00ffff;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-white font-display overflow-hidden h-screen flex selection:bg-primary selection:text-white">
+<!-- Sidebar -->
+<aside class="w-64 h-full bg-[#0F0F0F] border-r border-[#222] flex flex-col shrink-0 z-20">
+<div class="p-6 border-b border-[#222]">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-sm flex items-center justify-center transform rotate-45 shadow-[0_0_15px_rgba(255,31,31,0.5)]">
+<span class="material-symbols-outlined text-black transform -rotate-45" style="font-size: 20px; font-weight: 800;">hexagon</span>
+</div>
+<div class="flex flex-col ml-2">
+<h1 class="text-white text-lg font-bold tracking-[0.1em] leading-none">HEXCORE</h1>
+<span class="text-primary text-[10px] tracking-widest font-medium mt-1">ADMIN_V1.0</span>
+</div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto py-6 px-3 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 text-text-dim hover:text-white hover:bg-surface-accent rounded-sm transition-all group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-sm font-medium tracking-wide">DASHBOARD</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary/10 border-l-2 border-primary text-white rounded-r-sm transition-all group shadow-[inset_10px_0_20px_-10px_rgba(255,31,31,0.1)]" href="#">
+<span class="material-symbols-outlined text-xl text-primary drop-shadow-[0_0_8px_rgba(255,31,31,0.8)]">shopping_cart</span>
+<span class="text-sm font-bold tracking-wide">ORDERS</span>
+<span class="ml-auto text-[10px] bg-primary text-black font-bold px-1.5 py-0.5 rounded-sm">14</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-dim hover:text-white hover:bg-surface-accent rounded-sm transition-all group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">inventory_2</span>
+<span class="text-sm font-medium tracking-wide">INVENTORY</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-dim hover:text-white hover:bg-surface-accent rounded-sm transition-all group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">group</span>
+<span class="text-sm font-medium tracking-wide">CUSTOMERS</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-dim hover:text-white hover:bg-surface-accent rounded-sm transition-all group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">analytics</span>
+<span class="text-sm font-medium tracking-wide">ANALYTICS</span>
+</a>
+<div class="mt-4 px-4 py-2">
+<p class="text-[10px] text-[#444] font-bold tracking-widest uppercase mb-2">System</p>
+<div class="h-px bg-[#222] w-full mb-2"></div>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-text-dim hover:text-white hover:bg-surface-accent rounded-sm transition-all group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium tracking-wide">SETTINGS</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-dim hover:text-white hover:bg-surface-accent rounded-sm transition-all group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">terminal</span>
+<span class="text-sm font-medium tracking-wide">LOGS</span>
+</a>
+</nav>
+<div class="p-4 border-t border-[#222]">
+<div class="flex items-center gap-3 px-2">
+<div class="w-8 h-8 rounded-sm bg-gradient-to-tr from-gray-700 to-gray-600 border border-gray-500 overflow-hidden">
+<div class="w-full h-full bg-[#333] flex items-center justify-center text-xs font-bold">AD</div>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-white">ADMINISTRATOR</span>
+<span class="text-[10px] text-green-500 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> ONLINE
+                    </span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col relative overflow-hidden bg-background-dark">
+<!-- Background Grid Effect -->
+<div class="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style="background-image: linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px); background-size: 40px 40px;"></div>
+<!-- Header -->
+<header class="flex items-center justify-between px-8 py-6 z-10 border-b border-[#222] bg-background-dark/80 backdrop-blur-sm">
+<div>
+<h2 class="text-3xl font-black text-white tracking-tighter">ORDER_OPERATIONS</h2>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-primary text-xs font-bold px-1.5 border border-primary/30 rounded-[2px]">LIVE</span>
+<p class="text-text-dim text-sm tracking-wide">MANAGING INCOMING HARDWARE REQUISITIONS</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<input class="bg-[#111] border border-[#333] text-white text-sm px-4 py-2 w-64 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all font-mono placeholder:text-[#444] rounded-sm group-hover:border-[#555]" placeholder="SEARCH_CMD..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-[#444] text-lg pointer-events-none">search</span>
+</div>
+<button class="bg-primary hover:bg-[#d41919] text-black font-bold text-sm px-5 py-2.5 rounded-sm flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(255,31,31,0.3)] hover:shadow-[0_0_25px_rgba(255,31,31,0.5)]">
+<span class="material-symbols-outlined text-lg">add</span>
+                    NEW_ENTRY
+                </button>
+</div>
+</header>
+<!-- Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-8 py-6 z-10">
+<!-- Stat Card 1 -->
+<div class="bg-surface-dark border border-[#222] p-5 rounded-sm hover:border-primary/50 transition-colors group relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary/10 to-transparent"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="text-text-dim text-xs font-bold tracking-widest">REVENUE_24H</span>
+<span class="material-symbols-outlined text-primary/80">payments</span>
+</div>
+<div class="flex items-end gap-3">
+<span class="text-3xl font-bold text-white group-hover:text-primary transition-colors">$42,890</span>
+<span class="text-success text-xs font-bold mb-1.5 flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> 12%
+                    </span>
+</div>
+<div class="w-full bg-[#222] h-1 mt-4 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[75%] shadow-[0_0_10px_rgba(255,31,31,0.8)]"></div>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-dark border border-[#222] p-5 rounded-sm hover:border-primary/50 transition-colors group">
+<div class="flex justify-between items-start mb-4">
+<span class="text-text-dim text-xs font-bold tracking-widest">PENDING_BUILD</span>
+<span class="material-symbols-outlined text-text-dim">precision_manufacturing</span>
+</div>
+<div class="flex items-end gap-3">
+<span class="text-3xl font-bold text-white group-hover:text-white transition-colors">14 <span class="text-lg text-text-dim font-normal">UNITS</span></span>
+<span class="text-success text-xs font-bold mb-1.5 flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> 5%
+                    </span>
+</div>
+<div class="w-full bg-[#222] h-1 mt-4 rounded-full overflow-hidden">
+<div class="bg-white h-full w-[45%]"></div>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface-dark border border-[#222] p-5 rounded-sm hover:border-primary/50 transition-colors group">
+<div class="flex justify-between items-start mb-4">
+<span class="text-text-dim text-xs font-bold tracking-widest">FLAGGED_FRAUD</span>
+<span class="material-symbols-outlined text-danger">warning</span>
+</div>
+<div class="flex items-end gap-3">
+<span class="text-3xl font-bold text-white">3 <span class="text-lg text-text-dim font-normal">ALERTS</span></span>
+<span class="text-warning text-xs font-bold mb-1.5 flex items-center">
+<span class="material-symbols-outlined text-sm">priority_high</span> 2 NEW
+                    </span>
+</div>
+<div class="w-full bg-[#222] h-1 mt-4 rounded-full overflow-hidden">
+<div class="bg-danger h-full w-[20%] shadow-[0_0_10px_rgba(255,30,30,0.8)]"></div>
+</div>
+</div>
+<!-- Stat Card 4 -->
+<div class="bg-surface-dark border border-[#222] p-5 rounded-sm hover:border-primary/50 transition-colors group">
+<div class="flex justify-between items-start mb-4">
+<span class="text-text-dim text-xs font-bold tracking-widest">DISPATCHED</span>
+<span class="material-symbols-outlined text-text-dim">local_shipping</span>
+</div>
+<div class="flex items-end gap-3">
+<span class="text-3xl font-bold text-white">89%</span>
+<span class="text-danger text-xs font-bold mb-1.5 flex items-center">
+<span class="material-symbols-outlined text-sm">trending_down</span> 1.5%
+                    </span>
+</div>
+<div class="w-full bg-[#222] h-1 mt-4 rounded-full overflow-hidden">
+<div class="bg-gray-400 h-full w-[89%]"></div>
+</div>
+</div>
+</div>
+<!-- Filters & Chips -->
+<div class="px-8 pb-4 z-10 flex flex-wrap gap-4 items-center">
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
+<button class="bg-primary/20 border border-primary text-white text-xs font-bold px-4 py-1.5 rounded-sm hover:bg-primary hover:text-black transition-all">
+                    VIEW_ALL
+                </button>
+<button class="bg-[#1A1A1A] border border-[#333] text-text-dim text-xs font-bold px-4 py-1.5 rounded-sm hover:bg-[#222] hover:text-white transition-all">
+                    PAYMENT_PENDING
+                </button>
+<button class="bg-[#1A1A1A] border border-[#333] text-text-dim text-xs font-bold px-4 py-1.5 rounded-sm hover:bg-[#222] hover:text-white transition-all">
+                    IN_PRODUCTION
+                </button>
+<button class="bg-[#1A1A1A] border border-[#333] text-text-dim text-xs font-bold px-4 py-1.5 rounded-sm hover:bg-[#222] hover:text-white transition-all">
+                    QC_CHECK
+                </button>
+<button class="bg-[#1A1A1A] border border-[#333] text-text-dim text-xs font-bold px-4 py-1.5 rounded-sm hover:bg-[#222] hover:text-white transition-all">
+                    SHIPPED
+                </button>
+</div>
+<div class="ml-auto flex items-center gap-3">
+<div class="text-text-dim text-xs font-mono">SORT BY:</div>
+<select class="bg-[#111] border border-[#333] text-white text-xs font-bold py-1.5 pl-3 pr-8 rounded-sm focus:outline-none focus:border-primary">
+<option>DATE_DESC</option>
+<option>DATE_ASC</option>
+<option>AMOUNT_HIGH</option>
+</select>
+</div>
+</div>
+<!-- Orders Table -->
+<div class="flex-1 px-8 pb-8 z-10 overflow-hidden flex flex-col">
+<div class="bg-surface-dark border border-[#222] rounded-sm flex-1 flex flex-col overflow-hidden relative">
+<!-- Header -->
+<div class="grid grid-cols-[100px_1fr_1.5fr_120px_120px_150px_100px] gap-4 p-4 border-b border-[#222] bg-[#111] text-xs font-bold tracking-widest text-text-dim sticky top-0">
+<div class="pl-2">ORDER_ID</div>
+<div>CLIENT_TAG</div>
+<div>HARDWARE_SPEC</div>
+<div>DATE</div>
+<div>TOTAL</div>
+<div>STATUS_LOG</div>
+<div class="text-right pr-2">ACTION</div>
+</div>
+<!-- Scrollable Content -->
+<div class="overflow-y-auto flex-1 custom-scrollbar">
+<!-- Row 1 -->
+<div class="grid grid-cols-[100px_1fr_1.5fr_120px_120px_150px_100px] gap-4 p-4 border-b border-[#222] items-center hover:bg-white/5 transition-colors cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-0.5 bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="font-mono text-primary pl-2">#HEX-9921</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-800 overflow-hidden border border-gray-600">
+<img alt="Avatar of user" class="w-full h-full object-cover" data-alt="Male avatar face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbsxgzz2Dm7CqVEtxvoctrV-ARKFvDxSZhpwOI1_jh9bf8olK4D2jVqQLZsyIP0vEFsPJwJTzsqGlw_GFENxr1QoP_xXRYBhIm_KvnQc2YKyYITRsKjP-cWOUQ8VoEFZz0Wj7huiM5jwvTXGWmctZKO_4mRSlzRBE-Rm3qsdN-a5XicfiVn897QqNutxDIO_aEcj5h40HXi_jbg2ZGYklOK71KgjnmhuXazGxmu0lFIwwqa2WMffrAXQRybMVuHc6ZRj5tuUZr7Jw"/>
+</div>
+<div>
+<div class="font-bold text-white text-sm">Alex Chen</div>
+<div class="text-[10px] text-text-dim">VIP_MEMBER</div>
+</div>
+</div>
+<div class="text-sm text-gray-300 font-medium">RTX 4090 / i9-14900K / 64GB DDR5</div>
+<div class="text-sm text-text-dim font-mono">Oct 24, 2023</div>
+<div class="text-sm font-bold text-white font-mono">$4,299.00</div>
+<div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[2px] bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-[10px] font-bold tracking-wide">
+<span class="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span> PROCESSING
+                            </span>
+</div>
+<div class="flex justify-end pr-2 gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-dim hover:text-white transition-colors material-symbols-outlined text-lg">edit_square</button>
+<button class="text-text-dim hover:text-primary transition-colors material-symbols-outlined text-lg">terminal</button>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-[100px_1fr_1.5fr_120px_120px_150px_100px] gap-4 p-4 border-b border-[#222] items-center hover:bg-white/5 transition-colors cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-0.5 bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="font-mono text-text-dim pl-2 group-hover:text-primary transition-colors">#HEX-9920</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-800 overflow-hidden border border-gray-600">
+<img alt="Avatar of user" class="w-full h-full object-cover" data-alt="Female avatar face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3yApanblpCYeTiPMqip49j9LO2TTjTPO6e3R4lsLP7Bf2AIp9qo4thyxHTiOfCEdpASmrKd-9hTRWTmXxBx0vw1qkrqbJXIj6eXmvjiYuuWl0QIjigk9fI2aeQlSB2fsrqD9qbueV6D1Ckg5Sk8FAYdby0Z0t0FDGjAGCKMZlXuPgmUWlDs6lx8OGYBNu6OXoRqFrKOh_FBEt3BNZhYmPO5BjMQXUr5jamcXIPwMZrlMU3rKwSKlp6N5U_2C9YKgwKfBX9uomOek"/>
+</div>
+<div>
+<div class="font-bold text-white text-sm">Sarah Vance</div>
+<div class="text-[10px] text-text-dim">NEW_CLIENT</div>
+</div>
+</div>
+<div class="text-sm text-gray-300 font-medium">RX 7900 XTX / R9 7950X</div>
+<div class="text-sm text-text-dim font-mono">Oct 23, 2023</div>
+<div class="text-sm font-bold text-white font-mono">$3,150.00</div>
+<div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[2px] bg-green-500/10 border border-green-500/20 text-green-500 text-[10px] font-bold tracking-wide">
+<span class="material-symbols-outlined text-xs">check</span> SHIPPED
+                            </span>
+</div>
+<div class="flex justify-end pr-2 gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-dim hover:text-white transition-colors material-symbols-outlined text-lg">edit_square</button>
+<button class="text-text-dim hover:text-primary transition-colors material-symbols-outlined text-lg">terminal</button>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="grid grid-cols-[100px_1fr_1.5fr_120px_120px_150px_100px] gap-4 p-4 border-b border-[#222] items-center hover:bg-white/5 transition-colors cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-0.5 bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="font-mono text-text-dim pl-2 group-hover:text-primary transition-colors">#HEX-9919</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-800 overflow-hidden border border-gray-600">
+<div class="w-full h-full bg-indigo-900 flex items-center justify-center text-xs font-bold text-indigo-300">MK</div>
+</div>
+<div>
+<div class="font-bold text-white text-sm">Marcus K.</div>
+<div class="text-[10px] text-text-dim">RETURNING</div>
+</div>
+</div>
+<div class="text-sm text-gray-300 font-medium">Liquid Cool Kit / 3x NVMe 2TB</div>
+<div class="text-sm text-text-dim font-mono">Oct 23, 2023</div>
+<div class="text-sm font-bold text-white font-mono">$890.00</div>
+<div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[2px] bg-blue-500/10 border border-blue-500/20 text-blue-500 text-[10px] font-bold tracking-wide">
+<span class="material-symbols-outlined text-xs animate-spin" style="font-size: 10px;">settings</span> ASSEMBLING
+                            </span>
+</div>
+<div class="flex justify-end pr-2 gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-dim hover:text-white transition-colors material-symbols-outlined text-lg">edit_square</button>
+<button class="text-text-dim hover:text-primary transition-colors material-symbols-outlined text-lg">terminal</button>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="grid grid-cols-[100px_1fr_1.5fr_120px_120px_150px_100px] gap-4 p-4 border-b border-[#222] items-center hover:bg-white/5 transition-colors cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-0.5 bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="font-mono text-text-dim pl-2 group-hover:text-primary transition-colors">#HEX-9918</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-800 overflow-hidden border border-gray-600">
+<img alt="Avatar of user" class="w-full h-full object-cover" data-alt="Man avatar face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDneUqq3f4qBxrMU2BlTDKDc8NnzEar7GoU_6RkaT_tEgLajyNrMz0RYuNaj_-LnQ0emuWhhu0fNk1INhDob7J8PABkHS-HSbzvXSI_W8mDBk4O91wVwq2cids42dIEDthOu9dhrQJF1GhmIfbjZdTJG7RSc07xt9WWZcNoDNELzLkyvmU0X33ZDlC0XOvNTR9kQIxtTIh-NL2Y2mW1hI9gfod6ahZyfwjgVFQvgTW3HSUkgKZT3BxgFNu5hH7LaCUes4B1ihPVaL8"/>
+</div>
+<div>
+<div class="font-bold text-white text-sm">David Hoss</div>
+<div class="text-[10px] text-text-dim">ENTERPRISE</div>
+</div>
+</div>
+<div class="text-sm text-gray-300 font-medium">5x Workstation Setup / Threadripper</div>
+<div class="text-sm text-text-dim font-mono">Oct 22, 2023</div>
+<div class="text-sm font-bold text-white font-mono">$24,500.00</div>
+<div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[2px] bg-red-900/20 border border-red-500/50 text-red-500 text-[10px] font-bold tracking-wide">
+<span class="material-symbols-outlined text-xs">gpp_bad</span> PAYMENT_FAIL
+                            </span>
+</div>
+<div class="flex justify-end pr-2 gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-dim hover:text-white transition-colors material-symbols-outlined text-lg">edit_square</button>
+<button class="text-text-dim hover:text-primary transition-colors material-symbols-outlined text-lg">terminal</button>
+</div>
+</div>
+<!-- Row 5 -->
+<div class="grid grid-cols-[100px_1fr_1.5fr_120px_120px_150px_100px] gap-4 p-4 border-b border-[#222] items-center hover:bg-white/5 transition-colors cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-0.5 bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="font-mono text-text-dim pl-2 group-hover:text-primary transition-colors">#HEX-9917</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-800 overflow-hidden border border-gray-600">
+<div class="w-full h-full bg-gray-700 flex items-center justify-center text-xs font-bold text-gray-400">UN</div>
+</div>
+<div>
+<div class="font-bold text-white text-sm">Unknown Entity</div>
+<div class="text-[10px] text-text-dim">GUEST</div>
+</div>
+</div>
+<div class="text-sm text-gray-300 font-medium">Peripherals Bundle / Mech Keyboards</div>
+<div class="text-sm text-text-dim font-mono">Oct 22, 2023</div>
+<div class="text-sm font-bold text-white font-mono">$450.00</div>
+<div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[2px] bg-green-500/10 border border-green-500/20 text-green-500 text-[10px] font-bold tracking-wide">
+<span class="material-symbols-outlined text-xs">check</span> SHIPPED
+                            </span>
+</div>
+<div class="flex justify-end pr-2 gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-dim hover:text-white transition-colors material-symbols-outlined text-lg">edit_square</button>
+<button class="text-text-dim hover:text-primary transition-colors material-symbols-outlined text-lg">terminal</button>
+</div>
+</div>
+<!-- Row 6 -->
+<div class="grid grid-cols-[100px_1fr_1.5fr_120px_120px_150px_100px] gap-4 p-4 border-b border-[#222] items-center hover:bg-white/5 transition-colors cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-0.5 bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="font-mono text-text-dim pl-2 group-hover:text-primary transition-colors">#HEX-9916</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-800 overflow-hidden border border-gray-600">
+<img alt="Avatar of user" class="w-full h-full object-cover" data-alt="Female avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1L5PXAquPJB1OpVZImg41cawoX5urZuAmwCJEKbFYe3CRgBb88yTanefZ2X0WNhrHTd-KjarAqpQ4S42pvrVQy4gAlTBfODdsVNsYOhP-Aw6dEPLnYppm9hJyJlMiBuN3MzahZeTkQ-bAPHzwK2YfmQ9kwrP4mah_n-Q4DNnaK3VSDvBzeR0DxZY40HZiSUsG2mBW1pAvEY8BGfdHy-NbgsyOSmtevivtcxOu9x_byPct7qmneorUeixAquA1gavJegSgJBgUVqA"/>
+</div>
+<div>
+<div class="font-bold text-white text-sm">Elena R.</div>
+<div class="text-[10px] text-text-dim">VIP_MEMBER</div>
+</div>
+</div>
+<div class="text-sm text-gray-300 font-medium">Custom Water Loop / RTX 4080</div>
+<div class="text-sm text-text-dim font-mono">Oct 21, 2023</div>
+<div class="text-sm font-bold text-white font-mono">$2,899.00</div>
+<div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[2px] bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] font-bold tracking-wide">
+<span class="material-symbols-outlined text-xs">search</span> QC_CHECK
+                            </span>
+</div>
+<div class="flex justify-end pr-2 gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-dim hover:text-white transition-colors material-symbols-outlined text-lg">edit_square</button>
+<button class="text-text-dim hover:text-primary transition-colors material-symbols-outlined text-lg">terminal</button>
+</div>
+</div>
+</div>
+<!-- Footer / Pagination -->
+<div class="p-3 border-t border-[#222] bg-[#111] flex justify-between items-center text-xs">
+<div class="text-text-dim">SHOWING 1-6 OF 142 ORDERS</div>
+<div class="flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center border border-[#333] rounded-sm text-text-dim hover:text-white hover:border-white transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center border border-primary bg-primary text-black font-bold rounded-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center border border-[#333] rounded-sm text-text-dim hover:text-white hover:border-white transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center border border-[#333] rounded-sm text-text-dim hover:text-white hover:border-white transition-colors">3</button>
+<button class="w-8 h-8 flex items-center justify-center border border-[#333] rounded-sm text-text-dim hover:text-white hover:border-white transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Side Panel (Overlay Style) for active order -->
+<aside class="w-[400px] h-full bg-[#0F0F0F] border-l border-[#333] z-20 shadow-[-10px_0_30px_rgba(0,0,0,0.8)] absolute right-0 top-0 transform translate-x-full transition-transform hidden lg:flex flex-col">
+<!-- This would slide in via JS interaction, keeping it flex but theoretically hidden for this single page view -->
+<div class="p-6 border-b border-[#222] flex justify-between items-center bg-[#141414]">
+<div class="flex flex-col">
+<h3 class="text-xl font-bold text-white">ORDER DETAILS</h3>
+<span class="text-primary font-mono text-sm">#HEX-9921</span>
+</div>
+<button class="text-text-dim hover:text-white material-symbols-outlined">close</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
+<!-- Customer Section -->
+<div class="bg-surface-dark p-4 rounded-sm border border-[#222]">
+<h4 class="text-xs font-bold text-text-dim mb-3 uppercase tracking-widest">Client Profile</h4>
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-gray-800 overflow-hidden border border-gray-600">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="Customer face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiiGwpvexa2RDq3Bn4uupE2iJoyL43OWMuuvvskA-4MOTXJg9aUkxqx5nAvIxUS3Q2kEFwGMGspqzb8BVV-mG0Wa30LaxHHU1OAcQBzCeFFZ7V2errfx5RAaZFzr5HxUz6bji7-6vNT6MGhGsx0ehfXCp_3dVAJbk1gPmnBNd2yQ4soXQFDBEAYowIq4sYk-hRP34euifB33mOxeIL-pqQcLuGLJ6tGueuOCDFxfMrx0uuPtNmbhFmYXrz9HvCOM4lt5G2kt3YyJE"/>
+</div>
+<div>
+<div class="text-lg font-bold text-white">Alex Chen</div>
+<div class="text-sm text-text-dim">alex.chen@example.com</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 text-sm">
+<div>
+<span class="text-text-dim text-xs block mb-1">PHONE</span>
+<span class="text-white">+1 (555) 012-3456</span>
+</div>
+<div>
+<span class="text-text-dim text-xs block mb-1">LOCATION</span>
+<span class="text-white">Seattle, WA</span>
+</div>
+</div>
+</div>
+<!-- Build Specs -->
+<div class="bg-surface-dark p-4 rounded-sm border border-[#222]">
+<h4 class="text-xs font-bold text-text-dim mb-3 uppercase tracking-widest">Hardware Requisition</h4>
+<div class="space-y-3">
+<div class="flex justify-between items-center py-2 border-b border-[#222]">
+<div>
+<span class="text-white text-sm font-bold block">NVIDIA RTX 4090</span>
+<span class="text-text-dim text-xs">Founder's Edition</span>
+</div>
+<span class="text-white font-mono text-sm">$1,599</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-[#222]">
+<div>
+<span class="text-white text-sm font-bold block">Intel Core i9-14900K</span>
+<span class="text-text-dim text-xs">24-Core, 6.0 GHz</span>
+</div>
+<span class="text-white font-mono text-sm">$589</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-[#222]">
+<div>
+<span class="text-white text-sm font-bold block">Corsair Dominator</span>
+<span class="text-text-dim text-xs">64GB (2x32) DDR5-6000</span>
+</div>
+<span class="text-white font-mono text-sm">$289</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-4 mt-2">
+<span class="text-text-dim text-sm font-bold">TOTAL</span>
+<span class="text-primary text-xl font-bold font-mono">$4,299.00</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex gap-3">
+<button class="flex-1 bg-white hover:bg-gray-200 text-black font-bold py-3 px-4 rounded-sm transition-colors text-sm">
+                    PRINT INVOICE
+                </button>
+<button class="flex-1 bg-surface-dark border border-primary text-primary hover:bg-primary hover:text-black font-bold py-3 px-4 rounded-sm transition-all text-sm">
+                    UPDATE STATUS
+                </button>
+</div>
+</div>
+</aside>
+</body></html>

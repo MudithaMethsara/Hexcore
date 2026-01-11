@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hexcore_db?useSSL=false&amp;allowPublicKeyRetrieval=true</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">2005</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.show_sql">true</property>
+    <mapping class="org.redwolf.hexcore.entity.Province"/>
+    <mapping class="org.redwolf.hexcore.entity.District"/>
+    <mapping class="org.redwolf.hexcore.entity.Status"/>
+    <mapping class="org.redwolf.hexcore.entity.Users"/>
+    <mapping class="org.redwolf.hexcore.entity.City"/>
+    <mapping class="org.redwolf.hexcore.entity.Address"/>
+    <mapping class="org.redwolf.hexcore.entity.Color"/>
+    <mapping class="org.redwolf.hexcore.entity.Brand"/>
+    <mapping class="org.redwolf.hexcore.entity.Model"/>
+    <mapping class="org.redwolf.hexcore.entity.Quality"/>
+    <mapping class="org.redwolf.hexcore.entity.Storage"/>
+    <mapping class="org.redwolf.hexcore.entity.Products"/>
+    <mapping class="org.redwolf.hexcore.entity.Stock"/>
+    <mapping class="org.redwolf.hexcore.entity.DeliveryType"/>
+    <mapping class="org.redwolf.hexcore.entity.Orders"/>
+    <mapping class="org.redwolf.hexcore.entity.OrderItems"/>
+    <mapping class="org.redwolf.hexcore.entity.Role"/>
+    <mapping class="org.redwolf.hexcore.entity.HexcorePanel"/>
+  </session-factory>
+</hibernate-configuration>
